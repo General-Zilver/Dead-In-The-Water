@@ -38,20 +38,26 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: Background
-    uniqueID: 385762489
-    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: 1Far
+    uniqueID: 385762489
+    locked: 0
+  - name: 2FG1
+    uniqueID: 2399821203
+    locked: 0
+  - name: 3FG2
+    uniqueID: 2411783537
+    locked: 0
+  - name: 4Sand
+    uniqueID: 3716560839
     locked: 0
   - name: Player
     uniqueID: 4190711593
     locked: 0
   - name: Harpoon
     uniqueID: 4200371353
-    locked: 0
-  - name: New Layer 4
-    uniqueID: 2399821203
     locked: 0
   m_RenderingLayers:
   - Default
