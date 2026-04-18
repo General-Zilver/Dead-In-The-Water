@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 4989856463094689329}
   - component: {fileID: 3687771137475327320}
   - component: {fileID: 3450162144039489627}
+  - component: {fileID: -290462474809986472}
   m_Layer: 0
   m_Name: Shark
   m_TagString: Untagged
@@ -157,8 +158,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e345fa5282232fd42a743fcacca8619f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  player: {fileID: 0}
-  moveSpeed: 5
+  player: {fileID: 5752966574175967098, guid: a10d7dbb36aff0848b3be1562bd6c1b7, type: 3}
+  moveSpeed: 3
 --- !u!60 &3687771137475327320
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -322,3 +323,15 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0.25450316, y: -0.07}
   m_Radius: 0.13938747
+--- !u!114 &-290462474809986472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2711857190394514932}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4146563df3e93f541b6e56bc204bd503, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
