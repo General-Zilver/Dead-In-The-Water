@@ -31,15 +31,13 @@ public class Enemy_Health : MonoBehaviour
     void Die()
     {
         if (spawner != null)
-        {
             spawner.EnemyDied();
-        }
 
-
-
+        // Tell the game manager an enemy died so it can check if a key should now spawn
+        if (TreasureGameManager.Instance != null)
+            TreasureGameManager.Instance.RegisterEnemyKilled(transform.position);
 
         Destroy(gameObject);
-
     }
 
 }

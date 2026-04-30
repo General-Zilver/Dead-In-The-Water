@@ -20,26 +20,34 @@ public class Enemy_Spawner : MonoBehaviour
     private Transform player;
     private float spawnTimer = 0f;
     private int currentEnemyCount = 0;
+    private bool suddenDeathActive = false;
 
 
     void Start()
     {
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
         if (playerObj != null)
-        {
             player = playerObj.transform;
-        }
 
+        // Override Inspector values with difficulty-based values if DifficultyManager is present
+        if (DifficultyManager.Instance != null)
+        {
+            spawnInterval = DifficultyManager.Instance.SpawnRate;
+            maxEnemies    = DifficultyManager.Instance.MaxEnemies;
+        }
     }
 
     void Update()
     {
-        if (playerHasKey == null) return;
+        if (player == null) return;
 
-        float currentRate = playerHasKey ? keyHeldRate : spawnInterval;
+        // During sudden death, halve the spawn interval and double the enemy cap
+        float currentRate = suddenDeathActive ? spawnInterval * 0.5f : (playerHasKey ? keyHeldRate : spawnInterval);
         spawnTimer += Time.deltaTime;
 
-        if (spawnTimer >= currentRate && currentEnemyCount < maxEnemies)
+        int enemyCap = suddenDeathActive ? maxEnemies * 2 : maxEnemies;
+        bool underLimit = currentEnemyCount < enemyCap;
+        if (spawnTimer >= currentRate && underLimit)
         {
             SpawnEnemy();
             spawnTimer = 0f;
@@ -56,16 +64,29 @@ public class Enemy_Spawner : MonoBehaviour
 
         currentEnemyCount++;
 
-        // EnemyHealth health = enemy.GetComponent<EnemyHealth>();
-        // if (health != null)
-        // {
-        //     health.spawner = this;
-        // }
+        Enemy_Health health = enemy.GetComponent<Enemy_Health>();
+        if (health != null)
+            health.spawner = this;
 
     }
     public void EnemyDied()
     {
         currentEnemyCount = Mathf.Max(0, currentEnemyCount - 1);
+    }
+
+    // Called by TreasureGameManager when a key is collected, doubles cap and halves interval
+    public void StartSuddenDeath()
+    {
+        suddenDeathActive = true;
+        spawnTimer = 0f;
+        Debug.Log("Enemy_Spawner: sudden death active.");
+    }
+
+    // Called by TreasureGameManager when a chest is looted, returns spawning to normal
+    public void StopSuddenDeath()
+    {
+        suddenDeathActive = false;
+        Debug.Log("Enemy_Spawner: sudden death deactivated.");
     }
 
     Vector2 GetSpawnPosition()

@@ -1,16 +1,13 @@
 fileFormatVersion: 2
-guid: d8046a6e0acaec740b376356119ee8dd
+guid: cefe40a84c74f7446a8a9600a6349447
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2382908340504850858
-    second: Harpoon_0
+      213: 4858949291355474920
+    second: Chests-16x32_0
   - first:
-      213: 265050883009070605
-    second: Harpoon_1
-  - first:
-      213: 1320953492869387932
-    second: Harpoon_2
+      213: 5051840979942611459
+    second: Chests-16x32_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -119,35 +116,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Harpoon_0
+      name: Closed
       rect:
         serializedVersion: 2
-        x: 1
-        y: 12
-        width: 22
-        height: 13
-      alignment: 9
-      pivot: {x: 0.25868946, y: 0.33455703}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: aa17b10b28ac11120800000000000000
-      internalID: 2382908340504850858
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Harpoon_1
-      rect:
-        serializedVersion: 2
-        x: 2
-        y: 25
-        width: 27
-        height: 6
+        x: 0
+        y: 7
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -156,30 +131,52 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d06c821bf56ada300800000000000000
-      internalID: 265050883009070605
+      spriteID: 8eb01ecf2a47e6340800000000000000
+      internalID: 4858949291355474920
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Harpoon_2
+      name: Open
       rect:
         serializedVersion: 2
-        x: 1
-        y: 0
-        width: 28
-        height: 12
+        x: 16
+        y: 7
+        width: 16
+        height: 19
       alignment: 9
-      pivot: {x: 0.19177674, y: 0.28220165}
+      pivot: {x: 0.48387438, y: 0.4897195}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c969a4bf338f45210800000000000000
-      internalID: 1320953492869387932
+      spriteID: 30a9d3ffa9ebb1640800000000000000
+      internalID: 5051840979942611459
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Looted
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 7
+        width: 16
+        height: 19
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b68d7c83f16e3234cb352a901b3d5237
+      internalID: -1171952979
       vertices: []
       indices: 
       edges: []
@@ -188,7 +185,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: ddf21cb004ec6374e9e67a138c95b721
+    spriteID: 3dabba70abf9967498f7640ca9806f99
     internalID: 0
     vertices: []
     indices: 
@@ -196,11 +193,13 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":6.0,"y":3.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":2,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      Harpoon_0: 2382908340504850858
-      Harpoon_1: 265050883009070605
-      Harpoon_2: 1320953492869387932
+      Closed: 4858949291355474920
+      Looted: -1171952979
+      Open: 5051840979942611459
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
