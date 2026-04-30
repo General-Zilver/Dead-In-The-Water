@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: -290462474809986472}
   m_Layer: 0
   m_Name: Shark
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -115,7 +115,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 5746764926269108267, guid: ab7f0e298948e954fb9ce52f84ea6673, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.504717, g: 0.68735266, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -335,3 +335,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4146563df3e93f541b6e56bc204bd503, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  maxHealth: 3
+  spawner: {fileID: 0}

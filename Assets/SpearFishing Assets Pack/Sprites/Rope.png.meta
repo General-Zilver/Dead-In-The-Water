@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: d8046a6e0acaec740b376356119ee8dd
+guid: b763eae2ae3ea1b4f833fd548b57b01d
 TextureImporter:
   internalIDToNameTable:
   - first:
@@ -141,12 +141,12 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Harpoon_1
+      name: Rope
       rect:
         serializedVersion: 2
-        x: 2
+        x: 5
         y: 25
-        width: 27
+        width: 17
         height: 6
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -199,8 +199,8 @@ TextureImporter:
       entries: []
     nameFileIdTable:
       Harpoon_0: 2382908340504850858
-      Harpoon_1: 265050883009070605
       Harpoon_2: 1320953492869387932
+      Rope: 265050883009070605
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

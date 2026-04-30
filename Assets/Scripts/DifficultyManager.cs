@@ -15,9 +15,13 @@ public class DifficultyManager : MonoBehaviour
     [Header("Keys Required to Win")]
     public int[] keysRequired = { 1, 2, 3 };
 
-    [Header("Enemy Spawn Rate (seconds)")]
-    public float[] spawnRate = { 4f, 3f, 2f };
+    [Header("Enemy Settings")]
+    public float[] spawnRate  = { 6f, 4f, 2f };
     public float[] keyHeldSpawnRate = { 2f, 1f, 0.5f };
+    public int[]   maxEnemies = { 6, 8, 10 };
+
+    [Header("Kills Required Per Key")]
+    public int[] killsRequiredPerKey = { 12, 12, 12 };
 
     [Header("Whirlpools")]
     public bool[] whirlpoolsEnabled = { false, true, true };
@@ -28,8 +32,10 @@ public class DifficultyManager : MonoBehaviour
     public float AirDuration => airDuration[difficulty];
     public int PlayerHealth => playerHealth[difficulty];
     public int KeysRequired => keysRequired[difficulty];
-    public float SpawnRate => spawnRate[difficulty];
-    public float KeyHeldSpawnRate => keyHeldSpawnRate[difficulty];
+    public float SpawnRate          => spawnRate[difficulty];
+    public float KeyHeldSpawnRate   => keyHeldSpawnRate[difficulty];
+    public int   MaxEnemies         => maxEnemies[difficulty];
+    public int   KillsRequiredForNextKey => killsRequiredPerKey[difficulty];
     public bool WhirlpoolsEnabled => whirlpoolsEnabled[difficulty];
     public bool WhirlpoolsMoving => whirlpoolsMoving[difficulty];
 
