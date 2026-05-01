@@ -420,11 +420,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 24bda79da59b8634aa180c6e258a55fd, type: 3}
---- !u!4 &374746662 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5265018401414747356, guid: a10d7dbb36aff0848b3be1562bd6c1b7, type: 3}
-  m_PrefabInstance: {fileID: 1061878751}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &499771811
 GameObject:
   m_ObjectHideFlags: 0
@@ -567,6 +562,7 @@ GameObject:
   - component: {fileID: 717956258}
   - component: {fileID: 717956257}
   - component: {fileID: 717956256}
+  - component: {fileID: 717956260}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -724,6 +720,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &717956260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 717956254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 913e5e90b980469e933f87979a6eb647, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minX: -80.07
+  maxX: 112.06
+  minY: -24.65
+  maxY: 30.55
 --- !u!1 &822946424
 GameObject:
   m_ObjectHideFlags: 0
@@ -801,6 +813,21 @@ MonoBehaviour:
   - 1
   - 0.5
   maxEnemies: 06000000080000000a000000
+  easyEnemyWeights:
+    sharkWeight: 85
+    sawSharkWeight: 5
+    seaAnglerWeight: 5
+    swordFishWeight: 5
+  mediumEnemyWeights:
+    sharkWeight: 60
+    sawSharkWeight: 20
+    seaAnglerWeight: 10
+    swordFishWeight: 10
+  hardEnemyWeights:
+    sharkWeight: 25
+    sawSharkWeight: 25
+    seaAnglerWeight: 25
+    swordFishWeight: 25
   killsRequiredPerKey: 06000000080000000a000000
   whirlpoolsEnabled: 000101
   whirlpoolsMoving: 000001
@@ -970,10 +997,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8350143387306516479, guid: a10d7dbb36aff0848b3be1562bd6c1b7, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6240292}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 3233778579928239234, guid: a10d7dbb36aff0848b3be1562bd6c1b7, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1931373343}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a10d7dbb36aff0848b3be1562bd6c1b7, type: 3}
 --- !u!4 &1061878752 stripped
 Transform:
@@ -1265,28 +1289,60 @@ Transform:
   m_Children: []
   m_Father: {fileID: 29020436}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1931373341 stripped
+--- !u!1 &1800455000
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 3233778579928239234, guid: a10d7dbb36aff0848b3be1562bd6c1b7, type: 3}
-  m_PrefabInstance: {fileID: 1061878751}
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1931373343
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1800455001}
+  - component: {fileID: 1800455002}
+  m_Layer: 0
+  m_Name: AirBubbleSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1800455001
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1800455000}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1800455002
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1931373341}
+  m_GameObject: {fileID: 1800455000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ec8c89d2bbbe454bb4b7aef030fac8b, type: 3}
+  m_Script: {fileID: 11500000, guid: 32a595b844084b0aa8e6328a46b99df5, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::HarpoonGun
-  harpoonPrefab: {fileID: 3854719511769670273, guid: 047c4e87cc371e24f8d9b7c190545312, type: 3}
-  firePoint: {fileID: 1017709814}
-  aimPivot: {fileID: 374746662}
-  cooldown: 1.75
-  grappleRopeVisual: {fileID: 6240290}
+  m_EditorClassIdentifier: 
+  airBubblePrefab: {fileID: 3428275556580136713, guid: 5acc7b106f3097d4ea4cff9f4df318f4, type: 3}
+  totalGeneratedSpots: 16
+  minSpacingBetweenBubbles: 10
+  borderPadding: 10
+  minX: -107
+  maxX: 138
+  minY: -18
+  maxY: 28
+  respawnDelay: 20
+  maxGenerationAttempts: 1000
 --- !u!4 &1931373344 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8350143387306516479, guid: a10d7dbb36aff0848b3be1562bd6c1b7, type: 3}
@@ -1505,3 +1561,4 @@ SceneRoots:
   - {fileID: 130176054926630480}
   - {fileID: 1487432786}
   - {fileID: 29020436}
+  - {fileID: 1800455001}

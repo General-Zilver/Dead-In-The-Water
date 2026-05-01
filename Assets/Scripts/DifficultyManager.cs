@@ -1,5 +1,14 @@
 using UnityEngine;
 
+[System.Serializable]
+public class EnemySpawnWeights
+{
+    public float sharkWeight;
+    public float sawSharkWeight;
+    public float seaAnglerWeight;
+    public float swordFishWeight;
+}
+
 // This class manages the difficulty settings for the game. 
 // It uses arrays to store different values for each difficulty level (Easy, Medium, Hard).
 public class DifficultyManager : MonoBehaviour
@@ -20,6 +29,31 @@ public class DifficultyManager : MonoBehaviour
     public float[] keyHeldSpawnRate = { 2f, 1f, 0.5f };
     public int[]   maxEnemies = { 6, 8, 10 };
 
+    [Header("Enemy Spawn Weights")]
+    public EnemySpawnWeights easyEnemyWeights = new EnemySpawnWeights
+    {
+        sharkWeight = 85f,
+        sawSharkWeight = 5f,
+        seaAnglerWeight = 5f,
+        swordFishWeight = 5f
+    };
+
+    public EnemySpawnWeights mediumEnemyWeights = new EnemySpawnWeights
+    {
+        sharkWeight = 60f,
+        sawSharkWeight = 20f,
+        seaAnglerWeight = 10f,
+        swordFishWeight = 10f
+    };
+
+    public EnemySpawnWeights hardEnemyWeights = new EnemySpawnWeights
+    {
+        sharkWeight = 25f,
+        sawSharkWeight = 25f,
+        seaAnglerWeight = 25f,
+        swordFishWeight = 25f
+    };
+
     [Header("Kills Required Per Key")]
     public int[] killsRequiredPerKey = { 12, 12, 12 };
 
@@ -38,6 +72,19 @@ public class DifficultyManager : MonoBehaviour
     public int   KillsRequiredForNextKey => killsRequiredPerKey[difficulty];
     public bool WhirlpoolsEnabled => whirlpoolsEnabled[difficulty];
     public bool WhirlpoolsMoving => whirlpoolsMoving[difficulty];
+    public EnemySpawnWeights CurrentEnemyWeights
+    {
+        get
+        {
+            if (difficulty == 1)
+                return mediumEnemyWeights;
+
+            if (difficulty == 2)
+                return hardEnemyWeights;
+
+            return easyEnemyWeights;
+        }
+    }
 
     void Awake()
     {
