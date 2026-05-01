@@ -4,7 +4,10 @@ using System.Collections;
 public class Enemy_Spawner : MonoBehaviour
 {
     [Header("Enemy Settings")]
-    public GameObject enemyPrefab;  // Prefab of the enemy
+    public GameObject sharkPrefab;
+    public GameObject sawSharkPrefab;
+    public GameObject seaAnglerPrefab;
+    public GameObject swordFishPrefab;
     public int maxEnemies = 5;      // Maximum number of enemies
     public float spawnRadius = 15f; // Radius within which enemies will spawn
     public float minSpawnDistance = 8f; // Min distance so they don't spawn on top of player
@@ -60,14 +63,80 @@ public class Enemy_Spawner : MonoBehaviour
         Vector2 spawnPosition = GetSpawnPosition();
         if (spawnPosition == Vector2.zero) return;
 
-        GameObject enemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
+        GameObject prefabToSpawn = ChooseEnemyPrefab();
+        if (prefabToSpawn == null)
+            return;
+
+        GameObject enemy = Instantiate(prefabToSpawn, spawnPosition, Quaternion.identity);
 
         currentEnemyCount++;
 
         Enemy_Health health = enemy.GetComponent<Enemy_Health>();
+        if (health == null)
+            health = enemy.GetComponentInChildren<Enemy_Health>();
+
         if (health != null)
             health.spawner = this;
 
+    }
+
+    GameObject ChooseEnemyPrefab()
+    {
+        EnemySpawnWeights weights = DifficultyManager.Instance != null
+            ? DifficultyManager.Instance.CurrentEnemyWeights
+            : new EnemySpawnWeights
+            {
+                sharkWeight = 85f,
+                sawSharkWeight = 5f,
+                seaAnglerWeight = 5f,
+                swordFishWeight = 5f
+            };
+
+        float sharkWeight = Mathf.Max(0f, weights.sharkWeight);
+        float sawSharkWeight = Mathf.Max(0f, weights.sawSharkWeight);
+        float seaAnglerWeight = Mathf.Max(0f, weights.seaAnglerWeight);
+        float swordFishWeight = Mathf.Max(0f, weights.swordFishWeight);
+        float totalWeight = sharkWeight + sawSharkWeight + seaAnglerWeight + swordFishWeight;
+
+        if (totalWeight <= 0f)
+        {
+            Debug.LogWarning("Enemy_Spawner: enemy spawn weights are all zero. Falling back to Shark.");
+            return sharkPrefab;
+        }
+
+        float roll = Random.Range(0f, totalWeight);
+        GameObject selectedPrefab;
+        string selectedName;
+
+        if (roll < sharkWeight)
+        {
+            selectedPrefab = sharkPrefab;
+            selectedName = "Shark";
+        }
+        else if (roll < sharkWeight + sawSharkWeight)
+        {
+            selectedPrefab = sawSharkPrefab;
+            selectedName = "SawShark";
+        }
+        else if (roll < sharkWeight + sawSharkWeight + seaAnglerWeight)
+        {
+            selectedPrefab = seaAnglerPrefab;
+            selectedName = "SeaAngler";
+        }
+        else
+        {
+            selectedPrefab = swordFishPrefab;
+            selectedName = "SwordFish";
+        }
+
+        if (selectedPrefab != null)
+            return selectedPrefab;
+
+        Debug.LogWarning("Enemy_Spawner: selected " + selectedName + " prefab is missing. Falling back to Shark.");
+        if (sharkPrefab == null)
+            Debug.LogWarning("Enemy_Spawner: sharkPrefab is also missing, so no enemy can spawn.");
+
+        return sharkPrefab;
     }
     public void EnemyDied()
     {

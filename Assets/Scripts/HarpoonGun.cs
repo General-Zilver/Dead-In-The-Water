@@ -15,6 +15,14 @@ public class HarpoonGun : MonoBehaviour
     private void Awake()
     {
         playerController = GetComponentInParent<PlayerController>();
+
+        // A duplicate HarpoonGun on the same object would spawn two harpoons from one click.
+        HarpoonGun[] gunsOnThisObject = GetComponents<HarpoonGun>();
+        if (gunsOnThisObject.Length > 1 && gunsOnThisObject[0] != this)
+        {
+            Debug.LogWarning("Duplicate HarpoonGun found on " + gameObject.name + ". Disabling the extra one.");
+            enabled = false;
+        }
     }
 
     // Check for left click each frame and fire if cooldown has passed

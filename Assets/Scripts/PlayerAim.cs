@@ -27,18 +27,38 @@ public class PlayerAim : MonoBehaviour
     [SerializeField] private float aimUpThreshold = 0.5f;
     [SerializeField] private float aimDownThreshold = -0.5f;
 
+    private bool facingLeft;
+    private Vector2 aimDirection = Vector2.right;
+    private bool hasAimDirection;
+
+    public bool FacingLeft => facingLeft;
+    public Vector2 AimDirection => aimDirection;
+    public bool HasAimDirection => hasAimDirection;
+
     private void Update()
     {
-        if (aimCamera == null || aimPivot == null)
+        Camera cameraToUse = aimCamera != null ? aimCamera : Camera.main;
+        if (cameraToUse == null)
+        {
+            hasAimDirection = false;
             return;
+        }
 
-        Vector3 mouseWorld = aimCamera.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 mouseWorld = cameraToUse.ScreenToWorldPoint(Input.mousePosition);
         mouseWorld.z = 0f;
 
-        bool facingLeft = mouseWorld.x < transform.position.x;
+        facingLeft = mouseWorld.x < transform.position.x;
+        Vector2 newAimDirection = (Vector2)mouseWorld - (Vector2)transform.position;
+        hasAimDirection = newAimDirection.sqrMagnitude > 0.01f;
+
+        if (hasAimDirection)
+            aimDirection = newAimDirection.normalized;
 
         if (bodyRenderer != null)
             bodyRenderer.flipX = facingLeft;
+
+        if (aimPivot == null)
+            return;
 
         float yDelta = mouseWorld.y - transform.position.y;
 

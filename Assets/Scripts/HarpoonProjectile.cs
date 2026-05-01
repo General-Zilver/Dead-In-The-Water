@@ -8,6 +8,7 @@ public class HarpoonProjectile : MonoBehaviour
     [SerializeField] private float speed = 18f;
     [SerializeField] private float maxRange = 35f;
     [SerializeField] private float ropeDuration = 3f;
+    [SerializeField] private int enemyDamage = 1;
 
     private Vector2 direction;
     private PlayerController player;
@@ -54,6 +55,11 @@ public class HarpoonProjectile : MonoBehaviour
 
         if (other.CompareTag("Enemy"))
         {
+            // Stop this projectile from damaging multiple colliders on the same enemy.
+            hasHit = true;
+            if (col != null)
+                col.enabled = false;
+
             // Search parent first, then children, so the component can live on either the root or a child object
             JellyfishHarpoonTarget jellyfishTarget = other.GetComponentInParent<JellyfishHarpoonTarget>();
             if (jellyfishTarget == null)
@@ -72,9 +78,21 @@ public class HarpoonProjectile : MonoBehaviour
                 health = other.GetComponentInChildren<Enemy_Health>();
 
             if (health != null)
-                health.TakeDamage(999);
+            {
+                health.TakeDamage(enemyDamage, player);
+                if (health.IsBeingUsedForSawSharkRide)
+                {
+                    if (ropeVisual != null)
+                        ropeVisual.ShowRope(health.transform);
+
+                    StartCoroutine(HideRopeAndDestroy());
+                    return;
+                }
+            }
             else
+            {
                 Destroy(other.gameObject);
+            }
 
             Destroy(gameObject);
             return;
@@ -99,11 +117,17 @@ public class HarpoonProjectile : MonoBehaviour
                 if (col != null)
                     col.enabled = false;
 
-                if (player != null)
-                    player.StartPull(jellyfishTarget.transform);
+                bool pullStarted = player != null && player.StartPull(jellyfishTarget.transform, jellyfishTarget.DespawnNow);
 
                 Debug.Log("OnHarpooned called on PullNPC jellyfish.");
                 jellyfishTarget.OnHarpooned();
+
+                if (!pullStarted)
+                {
+                    Debug.Log("PullNPC grapple blocked because another grapple is active.");
+                    Destroy(gameObject);
+                    return;
+                }
 
                 if (ropeVisual != null)
                 {
@@ -130,16 +154,28 @@ public class HarpoonProjectile : MonoBehaviour
     private IEnumerator HideRopeAndDestroy()
     {
         float timer = 0f;
-        while (player != null && player.IsPulling && timer < ropeDuration)
+        float allowedDuration = ropeDuration;
+        if (player != null && player.IsSawSharkPulling)
+            allowedDuration = ropeDuration + 1f;
+
+        while (player != null && player.IsPulling && timer < allowedDuration)
         {
             yield return null;
             timer += Time.deltaTime;
         }
 
+        bool timedOutStillPulling = player != null && player.IsPulling;
+
         if (ropeVisual != null)
         {
             ropeVisual.HideRope();
             Debug.Log("Grapple rope hidden.");
+        }
+
+        if (timedOutStillPulling)
+        {
+            Debug.Log("Grapple pull timed out. Cancelling grapple state.");
+            player.CancelGrapple();
         }
 
         Destroy(gameObject);
