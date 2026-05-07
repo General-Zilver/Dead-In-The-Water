@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 3450162144039489627}
   - component: {fileID: -290462474809986472}
   - component: {fileID: 7426502868465963085}
+  - component: {fileID: -5588289043735011337}
   m_Layer: 7
   m_Name: Shark
   m_TagString: Enemy
@@ -337,6 +338,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   maxHealth: 3
+  sawSharkRidePrefab: {fileID: 0}
   spawner: {fileID: 0}
 --- !u!114 &7426502868465963085
 MonoBehaviour:
@@ -351,3 +353,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyType: 0
+  scoreValue: 50
+--- !u!114 &-5588289043735011337
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2711857190394514932}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b41b3788ad642e4f980c87766652c4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DamageDealer
+  damageAmount: 1

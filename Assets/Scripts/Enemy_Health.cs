@@ -144,6 +144,15 @@ public class Enemy_Health : MonoBehaviour
             TreasureGameManager.Instance.RegisterEnemyKilled(transform.position);
 
         Destroy(gameObject);
+
+        EnemyIdentity identity = GetComponent<EnemyIdentity>();
+        int points = (identity != null) ? identity.scoreValue : 50;
+
+        if (ScoreManager.Instance != null)
+        {
+            ScoreManager.Instance.AddScore(points);
+        }
+
     }
 
 }
