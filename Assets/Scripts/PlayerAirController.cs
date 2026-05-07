@@ -19,6 +19,12 @@ public class PlayerAirController : MonoBehaviour
         }
 
         currentAir = maxAir;
+
+        if(HudManager.Instance != null)
+        {
+            HudManager.Instance.UpdateAir(1f);
+        }
+
     }
 
     void Update()
@@ -27,6 +33,11 @@ public class PlayerAirController : MonoBehaviour
             return;
 
         currentAir = Mathf.Max(0f, currentAir - Time.deltaTime);
+
+        if(HudManager.Instance != null)
+        {
+            HudManager.Instance.UpdateAir(GetCurrentAirPercent());
+        }
 
         if (currentAir <= 0f && !outOfAirLogged)
         {
