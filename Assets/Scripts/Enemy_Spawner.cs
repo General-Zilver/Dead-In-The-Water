@@ -16,6 +16,7 @@ public class Enemy_Spawner : MonoBehaviour
     [Header("Spawn Rate ")]
     public float spawnInterval = 3f; // Time interval between spawns
     public float keyHeldRate = 1f; // Time interval becomes faster when key is in players inventory
+    [SerializeField] private bool logSpawnRolls = false;
 
     [HideInInspector]
     public bool playerHasKey = false;
@@ -36,6 +37,7 @@ public class Enemy_Spawner : MonoBehaviour
         if (DifficultyManager.Instance != null)
         {
             spawnInterval = DifficultyManager.Instance.SpawnRate;
+            keyHeldRate   = DifficultyManager.Instance.KeyHeldSpawnRate;
             maxEnemies    = DifficultyManager.Instance.MaxEnemies;
         }
     }
@@ -130,7 +132,20 @@ public class Enemy_Spawner : MonoBehaviour
         }
 
         if (selectedPrefab != null)
+        {
+            if (logSpawnRolls)
+                Debug.Log(
+                    "Enemy_Spawner rolled " + roll.ToString("0.00") +
+                    " / " + totalWeight.ToString("0.00") +
+                    " on difficulty " + (DifficultyManager.Instance != null ? DifficultyManager.Instance.difficulty : -1) +
+                    ", spawning " + selectedName +
+                    " with weights Shark=" + sharkWeight +
+                    ", SawShark=" + sawSharkWeight +
+                    ", SeaAngler=" + seaAnglerWeight +
+                    ", SwordFish=" + swordFishWeight);
+
             return selectedPrefab;
+        }
 
         Debug.LogWarning("Enemy_Spawner: selected " + selectedName + " prefab is missing. Falling back to Shark.");
         if (sharkPrefab == null)

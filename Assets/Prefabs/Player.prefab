@@ -409,7 +409,7 @@ MonoBehaviour:
   harpoonPrefab: {fileID: 3854719511769670273, guid: 047c4e87cc371e24f8d9b7c190545312, type: 3}
   firePoint: {fileID: 8358931583489339466}
   aimPivot: {fileID: 5265018401414747356}
-  cooldown: 1.75
+  cooldown: 0.875
   grappleRopeVisual: {fileID: 5121800992673593226}
 --- !u!1 &7147741195978491030
 GameObject:

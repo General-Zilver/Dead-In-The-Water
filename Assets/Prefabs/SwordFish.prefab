@@ -33,7 +33,7 @@ Transform:
   m_GameObject: {fileID: 7366743763312353032}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 24.88, y: 18.82, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 11, y: 11, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -323,6 +323,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   maxHealth: 3
+  sawSharkRidePrefab: {fileID: 0}
+  scorePopupPrefab: {fileID: 7538022219821914435, guid: 6aef13bf51d34014ea467a22fff22ec2, type: 3}
+  scorePopupOffset: {x: 0, y: 0, z: 0}
   spawner: {fileID: 0}
 --- !u!114 &8922782365319351634
 MonoBehaviour:
@@ -337,6 +340,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyType: 3
+  scoreValue: 50
 --- !u!114 &7762636744240255526
 MonoBehaviour:
   m_ObjectHideFlags: 0

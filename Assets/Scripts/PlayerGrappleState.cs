@@ -10,6 +10,7 @@ public class PlayerGrappleState : MonoBehaviour
     }
 
     public GrappleMode CurrentMode { get; private set; } = GrappleMode.None;
+    public bool IsCollisionImmune => CurrentMode != GrappleMode.None;
 
     public bool CanStartGrapple()
     {

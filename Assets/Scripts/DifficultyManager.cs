@@ -32,26 +32,26 @@ public class DifficultyManager : MonoBehaviour
     [Header("Enemy Spawn Weights")]
     public EnemySpawnWeights easyEnemyWeights = new EnemySpawnWeights
     {
-        sharkWeight = 85f,
-        sawSharkWeight = 5f,
-        seaAnglerWeight = 5f,
-        swordFishWeight = 5f
+        sharkWeight = 65f,
+        sawSharkWeight = 11f,
+        seaAnglerWeight = 12f,
+        swordFishWeight = 12f
     };
 
     public EnemySpawnWeights mediumEnemyWeights = new EnemySpawnWeights
     {
-        sharkWeight = 60f,
-        sawSharkWeight = 20f,
-        seaAnglerWeight = 10f,
-        swordFishWeight = 10f
+        sharkWeight = 55f,
+        sawSharkWeight = 11f,
+        seaAnglerWeight = 17f,
+        swordFishWeight = 17f
     };
 
     public EnemySpawnWeights hardEnemyWeights = new EnemySpawnWeights
     {
-        sharkWeight = 25f,
-        sawSharkWeight = 25f,
-        seaAnglerWeight = 25f,
-        swordFishWeight = 25f
+        sharkWeight = 30f,
+        sawSharkWeight = 11f,
+        seaAnglerWeight = 29f,
+        swordFishWeight = 30f
     };
 
     [Header("Kills Required Per Key")]

@@ -148,6 +148,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07fa36a23e988044493bcbaab8b82194, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  easyButton: {fileID: 1082634929}
+  mediumButton: {fileID: 692952280}
+  hardButton: {fileID: 1481741004}
 --- !u!4 &46859330
 Transform:
   m_ObjectHideFlags: 0
