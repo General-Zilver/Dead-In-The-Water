@@ -12,12 +12,17 @@ public class Enemy_Health : MonoBehaviour
     [SerializeField] private GameObject scorePopupPrefab;
     [SerializeField] private Vector3 scorePopupOffset = Vector3.zero;
 
+    [Header("Death Animation")]
+    [SerializeField] private RuntimeAnimatorController deathAnimationController;
+    [SerializeField] private float deathAnimationDuration = 2f;
+
     [HideInInspector]
     public Enemy_Spawner spawner;
 
     private int currentHealth;
     private bool isDead;
     private PlayerController pendingSawSharkRidePlayer;
+    private EnemyType enemyType = EnemyType.Shark;
 
     public bool IsBeingUsedForSawSharkRide { get; private set; }
 
@@ -25,6 +30,13 @@ public class Enemy_Health : MonoBehaviour
     void Awake()
     {
         currentHealth = maxHealth;
+
+        EnemyIdentity identity = GetComponent<EnemyIdentity>();
+        if (identity == null)
+            identity = GetComponentInChildren<EnemyIdentity>();
+
+        if (identity != null)
+            enemyType = identity.enemyType;
     }
 
     public void TakeDamage(int amount)
@@ -76,7 +88,7 @@ public class Enemy_Health : MonoBehaviour
         StopEnemyMovementForSawSharkPull();
 
         if (spawner != null)
-            spawner.EnemyDied();
+            spawner.EnemyDied(enemyType);
 
         if (TreasureGameManager.Instance != null)
             TreasureGameManager.Instance.RegisterEnemyKilled(transform.position);
@@ -143,13 +155,14 @@ public class Enemy_Health : MonoBehaviour
         isDead = true;
 
         if (spawner != null)
-            spawner.EnemyDied();
+            spawner.EnemyDied(enemyType);
 
         // Tell the game manager an enemy died so it can check if a key should now spawn
         if (TreasureGameManager.Instance != null)
             TreasureGameManager.Instance.RegisterEnemyKilled(transform.position);
 
         AwardScoreAndSpawnPopup();
+        SpawnDeathAnimation();
 
         Destroy(gameObject);
     }
@@ -173,5 +186,35 @@ public class Enemy_Health : MonoBehaviour
             return;
 
         Instantiate(scorePopupPrefab, transform.position + scorePopupOffset, Quaternion.identity);
+    }
+
+    void SpawnDeathAnimation()
+    {
+        if (deathAnimationController == null)
+            return;
+
+        SpriteRenderer sourceRenderer = GetComponentInChildren<SpriteRenderer>();
+        if (sourceRenderer == null)
+            return;
+
+        GameObject deathObject = new GameObject(gameObject.name + " Death Animation");
+        deathObject.transform.position = sourceRenderer.transform.position;
+        deathObject.transform.rotation = sourceRenderer.transform.rotation;
+        deathObject.transform.localScale = sourceRenderer.transform.lossyScale;
+
+        SpriteRenderer deathRenderer = deathObject.AddComponent<SpriteRenderer>();
+        deathRenderer.sprite = sourceRenderer.sprite;
+        deathRenderer.color = sourceRenderer.color;
+        deathRenderer.flipX = sourceRenderer.flipX;
+        deathRenderer.flipY = sourceRenderer.flipY;
+        deathRenderer.sortingLayerID = sourceRenderer.sortingLayerID;
+        deathRenderer.sortingOrder = sourceRenderer.sortingOrder;
+        deathRenderer.sharedMaterial = sourceRenderer.sharedMaterial;
+
+        Animator animator = deathObject.AddComponent<Animator>();
+        animator.runtimeAnimatorController = deathAnimationController;
+
+        DeathAnimationFade fade = deathObject.AddComponent<DeathAnimationFade>();
+        fade.Initialize(deathAnimationDuration, sourceRenderer.bounds.size);
     }
 }

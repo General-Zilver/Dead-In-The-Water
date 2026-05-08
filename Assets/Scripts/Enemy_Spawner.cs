@@ -25,6 +25,8 @@ public class Enemy_Spawner : MonoBehaviour
     private float spawnTimer = 0f;
     private int currentEnemyCount = 0;
     private bool suddenDeathActive = false;
+    private int[] aliveCountsByType = new int[System.Enum.GetValues(typeof(EnemyType)).Length];
+    private int[] killedCountsByType = new int[System.Enum.GetValues(typeof(EnemyType)).Length];
 
 
     void Start()
@@ -79,6 +81,9 @@ public class Enemy_Spawner : MonoBehaviour
 
         if (health != null)
             health.spawner = this;
+
+        EnemyType enemyType = GetEnemyType(enemy);
+        AddAliveCount(enemyType);
 
     }
 
@@ -156,6 +161,21 @@ public class Enemy_Spawner : MonoBehaviour
     public void EnemyDied()
     {
         currentEnemyCount = Mathf.Max(0, currentEnemyCount - 1);
+        UpdateEnemyStatsUI();
+    }
+
+    public void EnemyDied(EnemyType enemyType)
+    {
+        currentEnemyCount = Mathf.Max(0, currentEnemyCount - 1);
+
+        int index = (int)enemyType;
+        if (index >= 0 && index < aliveCountsByType.Length)
+        {
+            aliveCountsByType[index] = Mathf.Max(0, aliveCountsByType[index] - 1);
+            killedCountsByType[index]++;
+        }
+
+        UpdateEnemyStatsUI();
     }
 
     // Called by TreasureGameManager when a key is collected, doubles cap and halves interval
@@ -201,6 +221,30 @@ public class Enemy_Spawner : MonoBehaviour
         Gizmos.DrawWireSphere(player.position, spawnRadius);
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(player.position, minSpawnDistance);
+    }
+
+    private EnemyType GetEnemyType(GameObject enemy)
+    {
+        EnemyIdentity identity = enemy.GetComponent<EnemyIdentity>();
+        if (identity == null)
+            identity = enemy.GetComponentInChildren<EnemyIdentity>();
+
+        return identity != null ? identity.enemyType : EnemyType.Shark;
+    }
+
+    private void AddAliveCount(EnemyType enemyType)
+    {
+        int index = (int)enemyType;
+        if (index >= 0 && index < aliveCountsByType.Length)
+            aliveCountsByType[index]++;
+
+        UpdateEnemyStatsUI();
+    }
+
+    private void UpdateEnemyStatsUI()
+    {
+        if (HudManager.Instance != null)
+            HudManager.Instance.UpdateEnemyStats(aliveCountsByType, killedCountsByType);
     }
 
 

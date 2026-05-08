@@ -326,6 +326,8 @@ MonoBehaviour:
   sawSharkRidePrefab: {fileID: 0}
   scorePopupPrefab: {fileID: 7538022219821914435, guid: 6aef13bf51d34014ea467a22fff22ec2, type: 3}
   scorePopupOffset: {x: 0, y: 0, z: 0}
+  deathAnimationController: {fileID: 9100000, guid: 28272a103dd5d2442b78123f10081c92, type: 2}
+  deathAnimationDuration: 2
   spawner: {fileID: 0}
 --- !u!114 &6721339377509794005
 MonoBehaviour:

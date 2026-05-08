@@ -209,3 +209,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5f47a3da3ccb804aa233fdfd896da6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::JellyfishHarpoonTarget
+  deathAnimationController: {fileID: 9100000, guid: 41462d871fc9c7a4683b1f5ef8f45fd0, type: 2}
+  deathAnimationDuration: 2
