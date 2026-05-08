@@ -62,7 +62,7 @@ public class SeaAnglerMovement : MonoBehaviour
             playerAim = player.GetComponentInChildren<PlayerAim>();
 
         if (playerAim == null)
-            playerAim = FindObjectOfType<PlayerAim>();
+            playerAim = FindFirstObjectByType<PlayerAim>();
     }
 
     bool PlayerIsLookingAtSeaAngler()

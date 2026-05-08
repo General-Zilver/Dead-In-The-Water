@@ -45,9 +45,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   sharkPrefab: {fileID: 2711857190394514932, guid: 12890a16bf3d4b04bb4488e31bf293bc, type: 3}
-  sawSharkPrefab: {fileID: 0}
-  seaAnglerPrefab: {fileID: 0}
-  swordFishPrefab: {fileID: 0}
+  sawSharkPrefab: {fileID: 2711857190394514932, guid: 9da4254e848d0fc4a966f57f029fd14f, type: 3}
+  seaAnglerPrefab: {fileID: 1444579856240471388, guid: 948560389d55ecd4c9858b0bf4bf6e2c, type: 3}
+  swordFishPrefab: {fileID: 7366743763312353032, guid: e62e8a657f03dfd4ca1a308159fcb8cf, type: 3}
   maxEnemies: 5
   spawnRadius: 15
   minSpawnDistance: 8

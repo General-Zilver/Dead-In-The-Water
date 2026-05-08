@@ -163,7 +163,7 @@ public class TreasureGameManager : MonoBehaviour
     private void StartSuddenDeath()
     {
         suddenDeathActive = true;
-        Enemy_Spawner spawner = FindObjectOfType<Enemy_Spawner>();
+        Enemy_Spawner spawner = FindFirstObjectByType<Enemy_Spawner>();
         if (spawner != null)
             spawner.StartSuddenDeath();
         else
@@ -174,7 +174,7 @@ public class TreasureGameManager : MonoBehaviour
     private void StopSuddenDeath()
     {
         suddenDeathActive = false;
-        Enemy_Spawner spawner = FindObjectOfType<Enemy_Spawner>();
+        Enemy_Spawner spawner = FindFirstObjectByType<Enemy_Spawner>();
         if (spawner != null)
             spawner.StopSuddenDeath();
         else

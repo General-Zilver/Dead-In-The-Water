@@ -5,7 +5,7 @@ public class HarpoonGun : MonoBehaviour
     [SerializeField] private GameObject harpoonPrefab;
     [SerializeField] private Transform firePoint;
     [SerializeField] private Transform aimPivot;
-    [SerializeField] private float cooldown = 1.75f;
+    [SerializeField] private float cooldown = 0.875f;
     [SerializeField] private GrappleRopeVisual grappleRopeVisual;
 
     private float lastFireTime = -999f;

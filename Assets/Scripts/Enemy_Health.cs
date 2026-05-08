@@ -8,6 +8,10 @@ public class Enemy_Health : MonoBehaviour
     [Header("SawShark Ride")]
     [SerializeField] private GameObject sawSharkRidePrefab;
 
+    [Header("Score Popup")]
+    [SerializeField] private GameObject scorePopupPrefab;
+    [SerializeField] private Vector3 scorePopupOffset = Vector3.zero;
+
     [HideInInspector]
     public Enemy_Spawner spawner;
 
@@ -77,6 +81,8 @@ public class Enemy_Health : MonoBehaviour
         if (TreasureGameManager.Instance != null)
             TreasureGameManager.Instance.RegisterEnemyKilled(transform.position);
 
+        AwardScoreAndSpawnPopup();
+
         Debug.Log("SawShark defeated. Pulling player to SawShark before starting ride.");
         return true;
     }
@@ -143,8 +149,13 @@ public class Enemy_Health : MonoBehaviour
         if (TreasureGameManager.Instance != null)
             TreasureGameManager.Instance.RegisterEnemyKilled(transform.position);
 
-        Destroy(gameObject);
+        AwardScoreAndSpawnPopup();
 
+        Destroy(gameObject);
+    }
+
+    void AwardScoreAndSpawnPopup()
+    {
         EnemyIdentity identity = GetComponent<EnemyIdentity>();
         int points = (identity != null) ? identity.scoreValue : 50;
 
@@ -153,6 +164,14 @@ public class Enemy_Health : MonoBehaviour
             ScoreManager.Instance.AddScore(points);
         }
 
+        SpawnScorePopup();
     }
 
+    void SpawnScorePopup()
+    {
+        if (scorePopupPrefab == null)
+            return;
+
+        Instantiate(scorePopupPrefab, transform.position + scorePopupOffset, Quaternion.identity);
+    }
 }
