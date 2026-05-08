@@ -47,6 +47,7 @@ public class TreasureGameManager : MonoBehaviour
             requiredCount = 1;
 
         Debug.Log("TreasureGameManager: requires " + requiredCount + " keys and chests.");
+        UpdateKeyUI();
     }
 
     // Called by Enemy_Health when a real enemy dies
@@ -106,6 +107,7 @@ public class TreasureGameManager : MonoBehaviour
 
         collectedKeyIndexes.Add(keyIndex);
         keyWaitingToBeCollected = false;
+        UpdateKeyUI();
 
         Debug.Log("Key " + keyIndex + " collected. Chest " + keyIndex + " opened.");
 
@@ -187,5 +189,11 @@ public class TreasureGameManager : MonoBehaviour
         Debug.Log("Player wins!");
         // Uncomment the line below to freeze the game on win
         // Time.timeScale = 0f;
+    }
+
+    private void UpdateKeyUI()
+    {
+        if (HudManager.Instance != null)
+            HudManager.Instance.UpdateKeysCollected(collectedKeyIndexes.Count, requiredCount);
     }
 }
