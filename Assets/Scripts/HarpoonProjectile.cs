@@ -117,7 +117,11 @@ public class HarpoonProjectile : MonoBehaviour
                 if (col != null)
                     col.enabled = false;
 
-                bool pullStarted = player != null && player.StartPull(jellyfishTarget.transform, jellyfishTarget.DespawnNow);
+                bool pullStarted = player != null && player.StartPull(jellyfishTarget.transform, () =>
+                {
+                    if (jellyfishTarget != null)
+                        jellyfishTarget.DespawnNow();
+                });
 
                 Debug.Log("OnHarpooned called on PullNPC jellyfish.");
                 jellyfishTarget.OnHarpooned();

@@ -79,7 +79,14 @@ public class Enemy_Health : MonoBehaviour
             return false;
         }
 
-        if (!player.StartSawSharkPull(transform, StartSawSharkRide))
+        PlayerController sawSharkPullPlayer = player;
+        if (!player.StartSawSharkPull(transform, () =>
+        {
+            if (this != null)
+                StartSawSharkRide();
+            else if (sawSharkPullPlayer != null)
+                sawSharkPullPlayer.CancelGrapple();
+        }))
             return false;
 
         isDead = true;
@@ -145,6 +152,10 @@ public class Enemy_Health : MonoBehaviour
             if (behaviours[i] != this)
                 behaviours[i].enabled = false;
         }
+
+        Collider2D[] colliders = GetComponentsInChildren<Collider2D>();
+        for (int i = 0; i < colliders.Length; i++)
+            colliders[i].enabled = false;
     }
 
     public void Die()
