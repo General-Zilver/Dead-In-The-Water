@@ -11,28 +11,38 @@ public class DamageDealer : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        TryDamagePlayer(collision.gameObject);
+        TryDamagePlayer(collision.collider);
     }
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        TryDamagePlayer(collision.gameObject);
+        TryDamagePlayer(collision.collider);
     }
 
-    private void TryDamagePlayer(GameObject other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (!other.CompareTag("Player"))
+        TryDamagePlayer(other);
+    }
+
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        TryDamagePlayer(other);
+    }
+
+    private void TryDamagePlayer(Collider2D other)
+    {
+        if (other == null)
             return;
 
-        PlayerGrappleState grappleState = other.GetComponent<PlayerGrappleState>();
+        PlayerHealth health = other.GetComponentInParent<PlayerHealth>();
+        if (health == null || !health.CompareTag("Player"))
+            return;
+
+        PlayerGrappleState grappleState = health.GetComponent<PlayerGrappleState>();
         if (grappleState != null && grappleState.IsCollisionImmune)
             return;
 
         if (Time.time < nextAllowedDamageTime)
-            return;
-
-        PlayerHealth health = other.GetComponent<PlayerHealth>();
-        if (health == null)
             return;
 
         health.TakeDamage(damageAmount);

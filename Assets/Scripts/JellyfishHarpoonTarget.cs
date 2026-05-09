@@ -22,6 +22,7 @@ public class JellyfishHarpoonTarget : MonoBehaviour
 
         SpawnDeathAnimation();
         SetOriginalRenderersVisible(false);
+        SetCollidersEnabled(false);
         delayedDeathCoroutine = StartCoroutine(DieAfterDelay());
     }
 
@@ -76,5 +77,12 @@ public class JellyfishHarpoonTarget : MonoBehaviour
         SpriteRenderer[] renderers = GetComponentsInChildren<SpriteRenderer>();
         for (int i = 0; i < renderers.Length; i++)
             renderers[i].enabled = visible;
+    }
+
+    private void SetCollidersEnabled(bool enabled)
+    {
+        Collider2D[] colliders = GetComponentsInChildren<Collider2D>();
+        for (int i = 0; i < colliders.Length; i++)
+            colliders[i].enabled = enabled;
     }
 }

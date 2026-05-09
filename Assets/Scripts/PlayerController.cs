@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+using System.Collections.Generic;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour
@@ -8,8 +9,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float pullSpeedMultiplier = 3f;
     [SerializeField] private float momentumSpeedMultiplier = 5f;
     [SerializeField] private float pullReleaseDistancePercent = 0.25f;
+    [SerializeField] private float minimumPullReleaseDistance = 1.2f;
     [SerializeField] private float momentumDuration = 6f;
     [SerializeField] private float maxPullDuration = 3f;
+    [SerializeField] private bool ignorePullTargetCollision = true;
+    [SerializeField] private bool ignoreEnemyCollisionsDuringPull = true;
 
     [Header("World Bounds")]
     [SerializeField] private float minX = -80.07f;
@@ -35,6 +39,7 @@ public class PlayerController : MonoBehaviour
     private PlayerGrappleState grappleState;
     private bool startMomentumAfterPull;
     private Action onPullComplete;
+    private readonly List<Collider2D> ignoredPullColliders = new List<Collider2D>();
 
     // True only while the player is being actively pulled toward the target
     public bool IsPulling => pullState == PullState.Pulling;
@@ -87,6 +92,7 @@ public class PlayerController : MonoBehaviour
     private void HandlePulling()
     {
         pullTimer += Time.fixedDeltaTime;
+        IgnoreCurrentEnemyCollisions();
 
         Vector2 targetPos = pullTarget != null ? (Vector2)pullTarget.position : pullTargetFallback;
         if (pullTarget != null)
@@ -94,13 +100,21 @@ public class PlayerController : MonoBehaviour
 
         float remaining = Vector2.Distance(rb.position, targetPos);
 
-        if (remaining <= initialPullDistance * pullReleaseDistancePercent || pullTimer >= maxPullDuration)
+        float releaseDistance = Mathf.Max(minimumPullReleaseDistance, initialPullDistance * pullReleaseDistancePercent);
+        if (remaining <= releaseDistance || pullTimer >= maxPullDuration)
         {
             FinishPull();
             return;
         }
 
-        Vector2 pullDir = (targetPos - rb.position).normalized;
+        Vector2 toTarget = targetPos - rb.position;
+        if (toTarget.sqrMagnitude <= 0.0001f)
+        {
+            FinishPull();
+            return;
+        }
+
+        Vector2 pullDir = toTarget.normalized;
         // Store every frame so it is fresh when we enter momentum
         lastPullDirection = pullDir;
         rb.linearVelocity = pullDir * (moveSpeed * pullSpeedMultiplier) + moveInput * moveSpeed;
@@ -139,6 +153,11 @@ public class PlayerController : MonoBehaviour
         KeepPlayerInsideBounds();
     }
 
+    private void OnDisable()
+    {
+        ClearIgnoredPullCollisions();
+    }
+
     // Called by the harpoon projectile when it hits a PullNPC
     public bool StartPull(Transform target)
     {
@@ -173,6 +192,7 @@ public class PlayerController : MonoBehaviour
     {
         pullState = PullState.None;
         pullTarget = null;
+        ClearIgnoredPullCollisions();
         onPullComplete = null;
         startMomentumAfterPull = false;
         momentumTimer = 0f;
@@ -191,6 +211,9 @@ public class PlayerController : MonoBehaviour
         startMomentumAfterPull = shouldStartMomentum;
         onPullComplete = pullCompleteCallback;
         pullState = PullState.Pulling;
+
+        IgnorePullTargetCollisions(target);
+        IgnoreCurrentEnemyCollisions();
     }
 
     void FinishPull()
@@ -199,6 +222,7 @@ public class PlayerController : MonoBehaviour
         pullTimer = 0f;
         Action callback = onPullComplete;
         onPullComplete = null;
+        ClearIgnoredPullCollisions();
 
         if (startMomentumAfterPull)
         {
@@ -225,9 +249,85 @@ public class PlayerController : MonoBehaviour
         pullTarget = null;
         pullTimer = 0f;
         onPullComplete = null;
+        ClearIgnoredPullCollisions();
         startMomentumAfterPull = false;
+        if (grappleState != null)
+            grappleState.EndGrapple();
+
         momentumTimer = momentumDuration;
         pullState = PullState.Momentum;
+    }
+
+    void IgnorePullTargetCollisions(Transform target)
+    {
+        if (!ignorePullTargetCollision || playerCollider == null || target == null)
+            return;
+
+        Collider2D[] targetColliders = target.GetComponentsInChildren<Collider2D>();
+        for (int i = 0; i < targetColliders.Length; i++)
+        {
+            Collider2D targetCollider = targetColliders[i];
+            if (targetCollider == null || targetCollider == playerCollider)
+                continue;
+
+            Physics2D.IgnoreCollision(playerCollider, targetCollider, true);
+            ignoredPullColliders.Add(targetCollider);
+        }
+    }
+
+    void IgnoreCurrentEnemyCollisions()
+    {
+        if (!ignoreEnemyCollisionsDuringPull || playerCollider == null)
+            return;
+
+        Collider2D[] colliders = FindObjectsOfType<Collider2D>();
+        for (int i = 0; i < colliders.Length; i++)
+        {
+            Collider2D otherCollider = colliders[i];
+            if (!ShouldIgnoreDuringPull(otherCollider))
+                continue;
+
+            Physics2D.IgnoreCollision(playerCollider, otherCollider, true);
+            ignoredPullColliders.Add(otherCollider);
+        }
+    }
+
+    bool ShouldIgnoreDuringPull(Collider2D otherCollider)
+    {
+        if (otherCollider == null || otherCollider == playerCollider || ignoredPullColliders.Contains(otherCollider))
+            return false;
+
+        if (!otherCollider.enabled || !otherCollider.gameObject.activeInHierarchy)
+            return false;
+
+        if (otherCollider.CompareTag("Enemy") || otherCollider.CompareTag("PullNPC"))
+            return true;
+
+        Transform otherTransform = otherCollider.transform;
+        if (otherTransform.GetComponentInParent<Enemy_Health>() != null ||
+            otherTransform.GetComponentInParent<DamageDealer>() != null ||
+            otherTransform.GetComponentInParent<JellyfishHarpoonTarget>() != null)
+            return true;
+
+        return false;
+    }
+
+    void ClearIgnoredPullCollisions()
+    {
+        if (playerCollider == null)
+        {
+            ignoredPullColliders.Clear();
+            return;
+        }
+
+        for (int i = 0; i < ignoredPullColliders.Count; i++)
+        {
+            Collider2D targetCollider = ignoredPullColliders[i];
+            if (targetCollider != null)
+                Physics2D.IgnoreCollision(playerCollider, targetCollider, false);
+        }
+
+        ignoredPullColliders.Clear();
     }
 
     void KeepPlayerInsideBounds()

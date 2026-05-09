@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 7410734758801707911}
   - component: {fileID: 8922782365319351634}
   - component: {fileID: 7762636744240255526}
+  - component: {fileID: -5588289043735011337}
   m_Layer: 7
   m_Name: SwordFish
   m_TagString: Enemy
@@ -362,3 +363,17 @@ MonoBehaviour:
   dashSpeed: 25
   dashDuration: 3
   recoveryDuration: 3
+--- !u!114 &-5588289043735011337
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7366743763312353032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b41b3788ad642e4f980c87766652c4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DamageDealer
+  damageAmount: 1
+  damageCooldown: 1
