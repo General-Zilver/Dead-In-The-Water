@@ -2319,15 +2319,13 @@ MonoBehaviour:
   playerHealth: 0a0000000500000003000000
   keysRequired: 010000000200000003000000
   spawnRate:
+  - 5
   - 4
   - 3
-  - 2
-  - 2
-  - 2
   keyHeldSpawnRate:
   - 2
+  - 1.5
   - 1
-  - 0.5
   maxEnemies: 06000000080000000a000000
   easyEnemyWeights:
     sharkWeight: 65
@@ -2340,10 +2338,10 @@ MonoBehaviour:
     seaAnglerWeight: 17
     swordFishWeight: 17
   hardEnemyWeights:
-    sharkWeight: 30
-    sawSharkWeight: 11
-    seaAnglerWeight: 29
-    swordFishWeight: 30
+    sharkWeight: 41
+    sawSharkWeight: 15
+    seaAnglerWeight: 22
+    swordFishWeight: 22
   killsRequiredPerKey: 0c0000000c0000000c000000
   whirlpoolsEnabled: 000101
   whirlpoolsMoving: 000001
@@ -4436,7 +4434,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8405bb1454790e40b4bc300aca8334c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ChestSpawner
-  chestPrefab: {fileID: 3106317634323977281, guid: e9996e3666a428c45aff59b9b154be93, type: 3}
+  chestPrefab: {fileID: 1539981819246154681, guid: 586abcb0d5fdee24ab0ce7ba6a2e9d94, type: 3}
+  chestPrefabs:
+  - {fileID: 1539981819246154681, guid: 586abcb0d5fdee24ab0ce7ba6a2e9d94, type: 3}
+  - {fileID: 3106317634323977281, guid: e9996e3666a428c45aff59b9b154be93, type: 3}
+  - {fileID: 8903920134042330211, guid: b43680c17fafb5e49a6d8859951a7a45, type: 3}
   chestSpawnPoints:
   - {fileID: 658549681}
   - {fileID: 2135298251}
@@ -5799,6 +5801,38 @@ PrefabInstance:
       propertyPath: keyPrefab
       value: 
       objectReference: {fileID: 7573963627468288763, guid: 72fcc834bf83a0d48af295b30c2235f6, type: 3}
+    - target: {fileID: 396993101787789446, guid: 6300ba206229d2f49a23850130808472, type: 3}
+      propertyPath: keyPrefabs.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 396993101787789446, guid: 6300ba206229d2f49a23850130808472, type: 3}
+      propertyPath: keyPrefabs.Array.data[0]
+      value:
+      objectReference: {fileID: 6104848422066774102, guid: 40653f7b1738d694ebc5026a7eb628d1, type: 3}
+    - target: {fileID: 396993101787789446, guid: 6300ba206229d2f49a23850130808472, type: 3}
+      propertyPath: keyPrefabs.Array.data[1]
+      value:
+      objectReference: {fileID: 6104848422066774202, guid: 2802592a2bb06774394bb4ae6dd63700, type: 3}
+    - target: {fileID: 396993101787789446, guid: 6300ba206229d2f49a23850130808472, type: 3}
+      propertyPath: keyPrefabs.Array.data[2]
+      value:
+      objectReference: {fileID: 6104848422066774302, guid: 871fc321e4923d748b1b310d8973c5c1, type: 3}
+    - target: {fileID: 396993101787789446, guid: 6300ba206229d2f49a23850130808472, type: 3}
+      propertyPath: keySprites.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 396993101787789446, guid: 6300ba206229d2f49a23850130808472, type: 3}
+      propertyPath: keySprites.Array.data[0]
+      value:
+      objectReference: {fileID: 2869580775176698672, guid: 74b28ef888f725c409da801d538ee91c, type: 3}
+    - target: {fileID: 396993101787789446, guid: 6300ba206229d2f49a23850130808472, type: 3}
+      propertyPath: keySprites.Array.data[1]
+      value:
+      objectReference: {fileID: 8982652330240798638, guid: 47acdfe6b20d2c24881650fb848b979d, type: 3}
+    - target: {fileID: 396993101787789446, guid: 6300ba206229d2f49a23850130808472, type: 3}
+      propertyPath: keySprites.Array.data[2]
+      value:
+      objectReference: {fileID: 699742988220537437, guid: 7bd90caf06652cc4686248e8261f1972, type: 3}
     - target: {fileID: 3132756957396748731, guid: 6300ba206229d2f49a23850130808472, type: 3}
       propertyPath: m_LocalPosition.x
       value: -8.93753

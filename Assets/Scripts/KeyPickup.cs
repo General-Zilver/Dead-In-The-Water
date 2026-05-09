@@ -9,12 +9,14 @@ public class KeyPickup : MonoBehaviour
 
     private bool collected = false;
     private float collectibleAtTime;
+    private SpriteRenderer spriteRenderer;
     private SpriteRenderer[] spriteRenderers;
     private Color[] originalColors;
 
     private void Awake()
     {
         collectibleAtTime = Time.time + collectDelay;
+        spriteRenderer = GetComponent<SpriteRenderer>();
         spriteRenderers = GetComponentsInChildren<SpriteRenderer>();
         originalColors = new Color[spriteRenderers.Length];
 
@@ -34,6 +36,14 @@ public class KeyPickup : MonoBehaviour
     public void Initialize(int index)
     {
         keyIndex = index;
+    }
+
+    public void Initialize(int index, Sprite keySprite)
+    {
+        Initialize(index);
+
+        if (spriteRenderer != null && keySprite != null)
+            spriteRenderer.sprite = keySprite;
     }
 
     // Collect the key when the player touches it and notify the game manager

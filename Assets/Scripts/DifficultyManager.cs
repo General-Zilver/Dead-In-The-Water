@@ -25,8 +25,8 @@ public class DifficultyManager : MonoBehaviour
     public int[] keysRequired = { 1, 2, 3 };
 
     [Header("Enemy Settings")]
-    public float[] spawnRate  = { 6f, 4f, 2f };
-    public float[] keyHeldSpawnRate = { 2f, 1f, 0.5f };
+    public float[] spawnRate  = { 5f, 4f, 3f };
+    public float[] keyHeldSpawnRate = { 2f, 1.5f, 1f };
     public int[]   maxEnemies = { 6, 8, 10 };
 
     [Header("Enemy Spawn Weights")]
@@ -48,10 +48,10 @@ public class DifficultyManager : MonoBehaviour
 
     public EnemySpawnWeights hardEnemyWeights = new EnemySpawnWeights
     {
-        sharkWeight = 30f,
-        sawSharkWeight = 11f,
-        seaAnglerWeight = 29f,
-        swordFishWeight = 30f
+        sharkWeight = 41f,
+        sawSharkWeight = 15f,
+        seaAnglerWeight = 22f,
+        swordFishWeight = 22f
     };
 
     [Header("Kills Required Per Key")]

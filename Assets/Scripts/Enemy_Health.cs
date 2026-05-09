@@ -12,6 +12,10 @@ public class Enemy_Health : MonoBehaviour
     [SerializeField] private GameObject scorePopupPrefab;
     [SerializeField] private Vector3 scorePopupOffset = Vector3.zero;
 
+    [Header("Drops")]
+    [SerializeField] private GameObject gogglesDropPrefab;
+    [SerializeField, Range(0f, 1f)] private float gogglesDropChance = 0.05f;
+
     [Header("Death Animation")]
     [SerializeField] private RuntimeAnimatorController deathAnimationController;
     [SerializeField] private float deathAnimationDuration = 2f;
@@ -21,6 +25,8 @@ public class Enemy_Health : MonoBehaviour
 
     private int currentHealth;
     private bool isDead;
+    private bool warnedMissingGogglesDropPrefab;
+    private static bool warnedMissingTreasureGameManager;
     private PlayerController pendingSawSharkRidePlayer;
     private EnemyType enemyType = EnemyType.Shark;
 
@@ -99,8 +105,11 @@ public class Enemy_Health : MonoBehaviour
 
         if (TreasureGameManager.Instance != null)
             TreasureGameManager.Instance.RegisterEnemyKilled(transform.position);
+        else
+            WarnMissingTreasureGameManager();
 
         AwardScoreAndSpawnPopup();
+        TrySpawnGogglesDrop();
 
         Debug.Log("SawShark defeated. Pulling player to SawShark before starting ride.");
         return true;
@@ -171,11 +180,23 @@ public class Enemy_Health : MonoBehaviour
         // Tell the game manager an enemy died so it can check if a key should now spawn
         if (TreasureGameManager.Instance != null)
             TreasureGameManager.Instance.RegisterEnemyKilled(transform.position);
+        else
+            WarnMissingTreasureGameManager();
 
         AwardScoreAndSpawnPopup();
+        TrySpawnGogglesDrop();
         SpawnDeathAnimation();
 
         Destroy(gameObject);
+    }
+
+    void WarnMissingTreasureGameManager()
+    {
+        if (warnedMissingTreasureGameManager)
+            return;
+
+        warnedMissingTreasureGameManager = true;
+        Debug.LogWarning("Enemy_Health: TreasureGameManager.Instance is missing, so enemy kills cannot spawn keys.");
     }
 
     void AwardScoreAndSpawnPopup()
@@ -197,6 +218,26 @@ public class Enemy_Health : MonoBehaviour
             return;
 
         Instantiate(scorePopupPrefab, transform.position + scorePopupOffset, Quaternion.identity);
+    }
+
+    void TrySpawnGogglesDrop()
+    {
+        if (gogglesDropPrefab == null)
+        {
+            if (!warnedMissingGogglesDropPrefab)
+            {
+                warnedMissingGogglesDropPrefab = true;
+                Debug.LogWarning("Enemy_Health: gogglesDropPrefab is not assigned on " + gameObject.name + ".");
+            }
+
+            return;
+        }
+
+        if (Random.value > gogglesDropChance)
+            return;
+
+        Instantiate(gogglesDropPrefab, transform.position, Quaternion.identity);
+        Debug.Log("Enemy_Health: goggles dropped from " + gameObject.name + ".");
     }
 
     void SpawnDeathAnimation()

@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &8561337779136310862
+--- !u!1 &3174472985906595546
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,24 +8,24 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 177123160598956914}
-  - component: {fileID: 8494600919773826347}
-  - component: {fileID: 1381152762158721874}
-  - component: {fileID: 8903920134042330211}
+  - component: {fileID: 2832417679576098110}
+  - component: {fileID: 3249217019239736647}
+  - component: {fileID: 6104848422066774301}
+  - component: {fileID: 6104848422066774302}
   m_Layer: 0
-  m_Name: TreasureChest_3
+  m_Name: Red_Key
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &177123160598956914
+--- !u!4 &2832417679576098110
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8561337779136310862}
+  m_GameObject: {fileID: 3174472985906595546}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -34,14 +34,14 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &8494600919773826347
+--- !u!212 &3249217019239736647
 SpriteRenderer:
   serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8561337779136310862}
+  m_GameObject: {fileID: 3174472985906595546}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -81,25 +81,25 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -104255703
   m_SortingLayer: 5
-  m_SortingOrder: 5
+  m_SortingOrder: 100
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 8322665274642746122, guid: ea2459f36d7b70545b0ce07ac18ca5db, type: 3}
+  m_Sprite: {fileID: -6160545827754832630, guid: 727222c0d6365c54ca2278610397e0bd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 2.87, y: 2.35}
+  m_Size: {x: 5.8599997, y: 2.6713037}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!61 &1381152762158721874
+--- !u!61 &6104848422066774301
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8561337779136310862}
+  m_GameObject: {fileID: 3174472985906595546}
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
@@ -131,26 +131,26 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.95, y: 2.31}
-    newSize: {x: 2.87, y: 2.35}
+    oldSize: {x: 5.8599997, y: 2.6713037}
+    newSize: {x: 5.8599997, y: 2.6713037}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 2.87, y: 2.35}
+  m_Size: {x: 0.75, y: 0.75}
   m_EdgeRadius: 0
---- !u!114 &8903920134042330211
+--- !u!114 &6104848422066774302
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8561337779136310862}
+  m_GameObject: {fileID: 3174472985906595546}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 155d7fff6b124a945a1e9339e1a6dacd, type: 3}
+  m_Script: {fileID: 11500000, guid: 9e06d9e3fdc70b7418fcf3a24c69e9a7, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TreasureChest
-  closedSprite: {fileID: 8322665274642746122, guid: ea2459f36d7b70545b0ce07ac18ca5db, type: 3}
-  openSprite: {fileID: 6093387866532032824, guid: ea2459f36d7b70545b0ce07ac18ca5db, type: 3}
-  lootedSprite: {fileID: 6800871473378233394, guid: ea2459f36d7b70545b0ce07ac18ca5db, type: 3}
+  m_EditorClassIdentifier: Assembly-CSharp::KeyPickup
+  keyIndex: 2
+  collectDelay: 2
+  lockedAlpha: 0.45

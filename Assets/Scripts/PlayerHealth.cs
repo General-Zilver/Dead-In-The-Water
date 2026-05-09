@@ -145,11 +145,22 @@ public class PlayerHealth : MonoBehaviour
         UpdateHealthUI();
     }
 
+    public void GrantBonusHealth(int amount, int maxBonusHealth)
+    {
+        if (isDead) return;
+        if (amount <= 0) return;
+
+        int bonusCap = maxHealth + Mathf.Max(0, maxBonusHealth);
+        currentHealth = Mathf.Clamp(currentHealth + amount, 0, bonusCap);
+
+        UpdateHealthUI();
+    }
+
     private void UpdateHealthUI()
     {
         if (HudManager.Instance != null)
         {
-            HudManager.Instance.UpdateHealth(currentHealth, maxHealth);
+            HudManager.Instance.UpdateHealth(currentHealth, Mathf.Max(maxHealth, currentHealth));
         }
 
 

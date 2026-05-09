@@ -44,3 +44,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bd59bf157bad2a4ab28fbccb8b349f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TreasureGameManager
+  keyPrefab: {fileID: 7573963627468288763, guid: 72fcc834bf83a0d48af295b30c2235f6, type: 3}
+  keyPrefabs:
+  - {fileID: 6104848422066774102, guid: 40653f7b1738d694ebc5026a7eb628d1, type: 3}
+  - {fileID: 6104848422066774202, guid: 2802592a2bb06774394bb4ae6dd63700, type: 3}
+  - {fileID: 6104848422066774302, guid: 871fc321e4923d748b1b310d8973c5c1, type: 3}
+  keySprites:
+  - {fileID: 2869580775176698672, guid: 74b28ef888f725c409da801d538ee91c, type: 3}
+  - {fileID: 8982652330240798638, guid: 47acdfe6b20d2c24881650fb848b979d, type: 3}
+  - {fileID: 699742988220537437, guid: 7bd90caf06652cc4686248e8261f1972, type: 3}
+  spawnedKeyScale: 1
+  spawnedKeySortingOrder: 100

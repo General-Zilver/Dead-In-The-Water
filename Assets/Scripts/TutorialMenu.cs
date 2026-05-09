@@ -223,7 +223,7 @@ public class TutorialMenu : MonoBehaviour
         if (backButton != null)
         {
             RectTransform backTransform = backButton.GetComponent<RectTransform>();
-            SetAnchoredRect(backTransform, new Vector2(0.5f, 0.02f), new Vector2(0.5f, 0.02f), new Vector2(0f, 275f), new Vector2(320f, 88f));
+            SetAnchoredRect(backTransform, new Vector2(0.5f, 0f), new Vector2(0.5f, 0f), new Vector2(0f, 52.5f), new Vector2(320f, 88f));
             ApplyMenuButtonHoverColors(backButton);
         }
     }

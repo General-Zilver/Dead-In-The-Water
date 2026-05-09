@@ -298,7 +298,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b7e0c18d4a7091746b57ce094af9ab32, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::GrappleRopeVisual
   ropeStartPoint: {fileID: 8358931583489339466}
 --- !u!1 &3233778579928239234
@@ -404,7 +404,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5ec8c89d2bbbe454bb4b7aef030fac8b, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::HarpoonGun
   harpoonPrefab: {fileID: 3854719511769670273, guid: 047c4e87cc371e24f8d9b7c190545312, type: 3}
   firePoint: {fileID: 8358931583489339466}
@@ -458,6 +458,7 @@ GameObject:
   - component: {fileID: 319831580137957334}
   - component: {fileID: 4280667580614427871}
   - component: {fileID: 1220645680845060136}
+  - component: {fileID: 9036117668207405101}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -622,3 +623,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f85d6e31f3164c8cb705bb99d028a5b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &9036117668207405101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8952816438976961992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a50f3733d9f64b24987ad2d19cbb43f6, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerOxygenBubbles
+  bubblesAnimatorController: {fileID: 9100000, guid: 19267c6ec05b69a4f9fe6b6562eeb5be, type: 2}
+  localOffset: {x: 0, y: 3.85, z: 0}
+  localScale: {x: 0.75, y: 0.75, z: 1}
+  sortingLayerName: Player
+  sortingOrder: 100
+  animationSpeed: 1.25
+  delayBetweenLoops: 4
