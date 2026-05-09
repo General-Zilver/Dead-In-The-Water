@@ -356,8 +356,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SwordFishMovement
   player: {fileID: 0}
-  moveSpeed: 5.5
-  attackRange: 20
+  moveSpeed: 10
+  attackRange: 15
   windupDuration: 2
   dashSpeed: 25
   dashDuration: 3

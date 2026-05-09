@@ -1545,9 +1545,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   airDuration:
-  - 20
-  - 20
-  - 20
+  - 120
+  - 90
+  - 60
   playerHealth: 0a0000000500000003000000
   keysRequired: 010000000200000003000000
   spawnRate:
@@ -1576,7 +1576,7 @@ MonoBehaviour:
     sawSharkWeight: 11
     seaAnglerWeight: 29
     swordFishWeight: 30
-  killsRequiredPerKey: 06000000080000000a000000
+  killsRequiredPerKey: 0c0000000c0000000c000000
   whirlpoolsEnabled: 000101
   whirlpoolsMoving: 000001
   difficulty: 0
