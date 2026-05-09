@@ -189,6 +189,11 @@ public class TreasureGameManager : MonoBehaviour
         Debug.Log("Player wins!");
         // Uncomment the line below to freeze the game on win
         // Time.timeScale = 0f;
+
+        if (LevelManager.Instance != null)
+        {
+            LevelManager.Instance.GameOver(true);
+        }
     }
 
     private void UpdateKeyUI()
