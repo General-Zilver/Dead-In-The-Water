@@ -355,6 +355,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SawSharkMovement
   player: {fileID: 0}
   moveSpeed: 5
+  attackRange: 15
+  attackAnimationController: {fileID: 9100000, guid: 849637f2002090e4abd2e4c912c5fcec, type: 2}
 --- !u!114 &-5588289043735011337
 MonoBehaviour:
   m_ObjectHideFlags: 0

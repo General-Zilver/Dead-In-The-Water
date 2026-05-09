@@ -359,6 +359,10 @@ MonoBehaviour:
   player: {fileID: 0}
   moveSpeed: 10
   lookedAtDotThreshold: 0.7
+  visualScale: 1.25
+  attackRange: 15
+  attackAnimationController: {fileID: 9100000, guid: c7e89f1f7df17804b876ab1f1b4d943b, type: 2}
+  hidingAnimationController: {fileID: 9100000, guid: 8da1816d4c4f4b04185252a5280f5916, type: 2}
 --- !u!114 &-5588289043735011337
 MonoBehaviour:
   m_ObjectHideFlags: 0

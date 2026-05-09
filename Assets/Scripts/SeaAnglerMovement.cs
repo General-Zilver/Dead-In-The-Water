@@ -7,15 +7,27 @@ public class SeaAnglerMovement : MonoBehaviour
     public float moveSpeed = 6.5f;
 
     [SerializeField] private float lookedAtDotThreshold = 0.7f;
+    [SerializeField] private float visualScale = 1.25f;
+    [SerializeField] private float attackRange = 15f;
+    [SerializeField] private RuntimeAnimatorController attackAnimationController;
+    [SerializeField] private RuntimeAnimatorController hidingAnimationController;
 
     private Rigidbody2D rb;
     private SpriteRenderer spriteRenderer;
+    private Animator animator;
+    private RuntimeAnimatorController swimAnimationController;
     private PlayerAim playerAim;
+    private bool isPlayingAttackAnimation;
+    private bool isPlayingHidingAnimation;
 
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        spriteRenderer = EnemyVisualScaler.CreateScaledVisual(gameObject, visualScale);
+        animator = spriteRenderer != null ? spriteRenderer.GetComponent<Animator>() : GetComponentInChildren<Animator>();
+
+        if (animator != null)
+            swimAnimationController = animator.runtimeAnimatorController;
     }
 
     void Start()
@@ -33,20 +45,51 @@ public class SeaAnglerMovement : MonoBehaviour
             return;
         }
 
-        Vector2 directionToPlayer = ((Vector2)player.position - rb.position).normalized;
+        Vector2 toPlayer = (Vector2)player.position - rb.position;
+        Vector2 directionToPlayer = toPlayer.normalized;
+        bool playerIsLooking = PlayerIsLookingAtSeaAngler();
 
-        if (PlayerIsLookingAtSeaAngler())
+        if (playerIsLooking)
         {
             rb.linearVelocity = Vector2.zero;
-
-            // Face away from the player while frozen.
-            Vector2 awayFromPlayer = (rb.position - (Vector2)player.position).normalized;
-            FaceDirection(awayFromPlayer);
+            UpdateHidingAnimation(true);
             return;
         }
 
+        UpdateHidingAnimation(false);
+        UpdateAttackAnimation(toPlayer.magnitude <= attackRange);
+
         rb.linearVelocity = directionToPlayer * moveSpeed;
         FaceDirection(directionToPlayer);
+    }
+
+    void UpdateAttackAnimation(bool shouldPlayAttack)
+    {
+        if (animator == null || isPlayingHidingAnimation || isPlayingAttackAnimation == shouldPlayAttack)
+            return;
+
+        isPlayingAttackAnimation = shouldPlayAttack;
+        if (shouldPlayAttack && attackAnimationController != null)
+            animator.runtimeAnimatorController = attackAnimationController;
+        else if (!shouldPlayAttack && swimAnimationController != null)
+            animator.runtimeAnimatorController = swimAnimationController;
+    }
+
+    void UpdateHidingAnimation(bool shouldPlayHiding)
+    {
+        if (animator == null || isPlayingHidingAnimation == shouldPlayHiding)
+            return;
+
+        isPlayingHidingAnimation = shouldPlayHiding;
+        if (shouldPlayHiding && hidingAnimationController != null)
+        {
+            isPlayingAttackAnimation = false;
+            animator.runtimeAnimatorController = hidingAnimationController;
+        }
+        else
+        {
+            UpdateAttackAnimation(player != null && Vector2.Distance(rb.position, player.position) <= attackRange);
+        }
     }
 
     void FindPlayerIfNeeded()

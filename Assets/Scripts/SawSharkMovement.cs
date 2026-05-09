@@ -5,14 +5,23 @@ public class SawSharkMovement : MonoBehaviour
 {
     public Transform player;
     public float moveSpeed = 5f;
+    [SerializeField] private float attackRange = 15f;
+    [SerializeField] private RuntimeAnimatorController attackAnimationController;
 
     private Rigidbody2D rb;
     private SpriteRenderer spriteRenderer;
+    private Animator animator;
+    private RuntimeAnimatorController swimAnimationController;
+    private bool isPlayingAttackAnimation;
 
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        animator = GetComponentInChildren<Animator>();
+
+        if (animator != null)
+            swimAnimationController = animator.runtimeAnimatorController;
     }
 
     void Start()
@@ -30,9 +39,24 @@ public class SawSharkMovement : MonoBehaviour
             return;
         }
 
-        Vector2 directionToPlayer = ((Vector2)player.position - rb.position).normalized;
+        Vector2 toPlayer = (Vector2)player.position - rb.position;
+        Vector2 directionToPlayer = toPlayer.normalized;
+        UpdateAttackAnimation(toPlayer.magnitude <= attackRange);
+
         rb.linearVelocity = directionToPlayer * moveSpeed;
         FaceDirection(directionToPlayer);
+    }
+
+    void UpdateAttackAnimation(bool shouldPlayAttack)
+    {
+        if (animator == null || isPlayingAttackAnimation == shouldPlayAttack)
+            return;
+
+        isPlayingAttackAnimation = shouldPlayAttack;
+        if (shouldPlayAttack && attackAnimationController != null)
+            animator.runtimeAnimatorController = attackAnimationController;
+        else if (!shouldPlayAttack && swimAnimationController != null)
+            animator.runtimeAnimatorController = swimAnimationController;
     }
 
     void FindPlayerIfNeeded()

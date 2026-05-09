@@ -152,3 +152,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::KeyPickup
   keyIndex: 0
+  collectDelay: 2
+  lockedAlpha: 0.45
