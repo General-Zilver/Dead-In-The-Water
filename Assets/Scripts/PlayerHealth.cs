@@ -68,10 +68,15 @@ public class PlayerHealth : MonoBehaviour
 
     private void Die()
     {
+        if (isDead) return;
         isDead = true;
 
         Debug.Log("Player has drowned!");
 
+        if (LevelManager.Instance != null)
+        {
+            LevelManager.Instance.GameOver(false);
+        }
     }
 
 }

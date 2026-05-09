@@ -43,6 +43,11 @@ public class PlayerAirController : MonoBehaviour
         {
             outOfAirLogged = true;
             Debug.Log("PlayerAirController: player is out of air.");
+
+            if (LevelManager.Instance != null)
+            {
+                LevelManager.Instance.GameOver(false);
+            }
         }
     }
 
