@@ -356,5 +356,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SeaAnglerMovement
   player: {fileID: 0}
-  moveSpeed: 6.5
+  moveSpeed: 10
   lookedAtDotThreshold: 0.7
