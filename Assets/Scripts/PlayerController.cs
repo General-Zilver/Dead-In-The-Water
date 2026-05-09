@@ -280,7 +280,7 @@ public class PlayerController : MonoBehaviour
         if (!ignoreEnemyCollisionsDuringPull || playerCollider == null)
             return;
 
-        Collider2D[] colliders = FindObjectsOfType<Collider2D>();
+        Collider2D[] colliders = FindObjectsByType<Collider2D>(FindObjectsSortMode.None);
         for (int i = 0; i < colliders.Length; i++)
         {
             Collider2D otherCollider = colliders[i];

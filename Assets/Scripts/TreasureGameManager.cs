@@ -7,6 +7,10 @@ public class TreasureGameManager : MonoBehaviour
 
     [Header("Key Spawning")]
     [SerializeField] private KeyPickup keyPrefab;
+    [SerializeField] private KeyPickup[] keyPrefabs;
+    [SerializeField] private Sprite[] keySprites;
+    [SerializeField] private float spawnedKeyScale = 1f;
+    [SerializeField] private int spawnedKeySortingOrder = 100;
 
     private int requiredCount;
 
@@ -46,6 +50,8 @@ public class TreasureGameManager : MonoBehaviour
         else
             requiredCount = 1;
 
+        requiredCount = Mathf.Max(1, requiredCount);
+
         Debug.Log("TreasureGameManager: requires " + requiredCount + " keys and chests.");
         UpdateKeyUI();
     }
@@ -66,7 +72,10 @@ public class TreasureGameManager : MonoBehaviour
         }
 
         if (currentObjectiveIndex >= requiredCount)
+        {
+            Debug.Log("Kill ignored because all key objectives are complete.");
             return;
+        }
 
         killsTowardCurrentKey++;
 
@@ -78,24 +87,88 @@ public class TreasureGameManager : MonoBehaviour
 
         if (killsTowardCurrentKey >= required)
         {
-            SpawnKey(currentObjectiveIndex, deathPosition);
-            keyWaitingToBeCollected = true;
-            Debug.Log("Key " + currentObjectiveIndex + " spawned. Kill counting paused until chest " + currentObjectiveIndex + " is looted.");
+            if (SpawnKey(currentObjectiveIndex, deathPosition))
+            {
+                keyWaitingToBeCollected = true;
+                Debug.Log("Key " + currentObjectiveIndex + " spawned. Kill counting paused until chest " + currentObjectiveIndex + " is looted.");
+            }
         }
     }
 
     // Instantiate the key prefab at the enemy death position
-    private void SpawnKey(int keyIndex, Vector3 spawnPosition)
+    private bool SpawnKey(int keyIndex, Vector3 spawnPosition)
     {
-        if (keyPrefab == null)
+        KeyPickup prefab = GetKeyPrefab(keyIndex);
+        if (prefab == null)
         {
-            Debug.LogWarning("TreasureGameManager: keyPrefab is not assigned.");
-            return;
+            return SpawnFallbackKey(keyIndex, spawnPosition);
         }
 
-        KeyPickup key = Instantiate(keyPrefab, spawnPosition, Quaternion.identity);
+        KeyPickup key = Instantiate(prefab, spawnPosition, Quaternion.identity);
         key.Initialize(keyIndex);
+        ConfigureSpawnedKey(key);
         Debug.Log("Key " + keyIndex + " spawned at " + spawnPosition);
+        return true;
+    }
+
+    private KeyPickup GetKeyPrefab(int keyIndex)
+    {
+        if (keyPrefabs != null && keyIndex >= 0 && keyIndex < keyPrefabs.Length && keyPrefabs[keyIndex] != null)
+            return keyPrefabs[keyIndex];
+
+        return keyPrefab;
+    }
+
+    private void ConfigureSpawnedKey(KeyPickup key)
+    {
+        if (key == null)
+            return;
+
+        key.transform.localScale = Vector3.one * spawnedKeyScale;
+
+        SpriteRenderer spriteRenderer = key.GetComponent<SpriteRenderer>();
+        if (spriteRenderer != null)
+            spriteRenderer.sortingOrder = spawnedKeySortingOrder;
+
+        BoxCollider2D collider = key.GetComponent<BoxCollider2D>();
+        if (collider != null)
+            collider.size = new Vector2(2f, 1.2f);
+    }
+
+    private bool SpawnFallbackKey(int keyIndex, Vector3 spawnPosition)
+    {
+        Sprite keySprite = GetKeySprite(keyIndex);
+        if (keySprite == null)
+        {
+            Debug.LogWarning("TreasureGameManager: keyPrefab is not assigned and no fallback key sprite exists for index " + keyIndex + ".");
+            return false;
+        }
+
+        GameObject keyObject = new GameObject("KeyPickup_Fallback_" + keyIndex, typeof(SpriteRenderer), typeof(BoxCollider2D), typeof(KeyPickup));
+        keyObject.transform.position = spawnPosition;
+        keyObject.transform.localScale = Vector3.one * spawnedKeyScale;
+
+        SpriteRenderer spriteRenderer = keyObject.GetComponent<SpriteRenderer>();
+        spriteRenderer.sprite = keySprite;
+        spriteRenderer.sortingOrder = spawnedKeySortingOrder;
+
+        BoxCollider2D collider = keyObject.GetComponent<BoxCollider2D>();
+        collider.isTrigger = true;
+        collider.size = new Vector2(2f, 1.2f);
+
+        KeyPickup key = keyObject.GetComponent<KeyPickup>();
+        key.Initialize(keyIndex, keySprite);
+
+        Debug.LogWarning("TreasureGameManager: keyPrefab was missing, spawned fallback key " + keyIndex + " at " + spawnPosition + ".");
+        return true;
+    }
+
+    private Sprite GetKeySprite(int keyIndex)
+    {
+        if (keySprites != null && keyIndex >= 0 && keyIndex < keySprites.Length)
+            return keySprites[keyIndex];
+
+        return null;
     }
 
     // Called by KeyPickup when the player touches a key

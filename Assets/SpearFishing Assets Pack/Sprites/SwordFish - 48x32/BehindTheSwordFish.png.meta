@@ -1,0 +1,462 @@
+fileFormatVersion: 2
+guid: 323d6bb2c1c654346b1c96c4be5e57e4
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -4214559620091486046
+    second: BehindTheSwordFish_0
+  - first:
+      213: 7406414016591736527
+    second: BehindTheSwordFish_1
+  - first:
+      213: -8031747187338152374
+    second: BehindTheSwordFish_2
+  - first:
+      213: -1664392387111428208
+    second: BehindTheSwordFish_3
+  - first:
+      213: -7201117270259566841
+    second: BehindTheSwordFish_4
+  - first:
+      213: -3004661280052740415
+    second: BehindTheSwordFish_5
+  - first:
+      213: 2998836875568874349
+    second: BehindTheSwordFish_6
+  - first:
+      213: -1956981380346198828
+    second: BehindTheSwordFish_7
+  - first:
+      213: -6997685637624317282
+    second: BehindTheSwordFish_8
+  - first:
+      213: -1260879366486472141
+    second: BehindTheSwordFish_9
+  - first:
+      213: -1547078627134618640
+    second: BehindTheSwordFish_10
+  - first:
+      213: -3358093975902542849
+    second: BehindTheSwordFish_11
+  - first:
+      213: -2227165057820456428
+    second: BehindTheSwordFish_12
+  - first:
+      213: -7335157356987356144
+    second: BehindTheSwordFish_13
+  - first:
+      213: 5041150628185300806
+    second: BehindTheSwordFish_14
+  - first:
+      213: -5010770403885419582
+    second: BehindTheSwordFish_15
+  - first:
+      213: 1564460955023803976
+    second: BehindTheSwordFish_16
+  - first:
+      213: 5852181467249822424
+    second: BehindTheSwordFish_17
+  - first:
+      213: 5303565878692265551
+    second: BehindTheSwordFish_18
+  - first:
+      213: 4805710269970065942
+    second: BehindTheSwordFish_19
+  - first:
+      213: 5893371212691318414
+    second: BehindTheSwordFish_20
+  - first:
+      213: -311888705016384593
+    second: BehindTheSwordFish_21
+  - first:
+      213: -3671003256022404751
+    second: BehindTheSwordFish_22
+  - first:
+      213: 8751922597258734572
+    second: BehindTheSwordFish_23
+  - first:
+      213: -4930701720329450891
+    second: BehindTheSwordFish_24
+  - first:
+      213: 6467975277889674875
+    second: BehindTheSwordFish_25
+  - first:
+      213: -1291627763026410516
+    second: BehindTheSwordFish_26
+  - first:
+      213: 2000953385613365
+    second: BehindTheSwordFish_27
+  - first:
+      213: -7522481391427258120
+    second: BehindTheSwordFish_28
+  - first:
+      213: -9177108088356772379
+    second: BehindTheSwordFish_29
+  - first:
+      213: -3062779815210229057
+    second: BehindTheSwordFish_30
+  - first:
+      213: -425931703102152534
+    second: BehindTheSwordFish_31
+  - first:
+      213: 4727994454687544586
+    second: BehindTheSwordFish_32
+  - first:
+      213: 7620612134036423502
+    second: BehindTheSwordFish_33
+  - first:
+      213: 3568489552651889502
+    second: BehindTheSwordFish_34
+  - first:
+      213: 8360313617405399046
+    second: BehindTheSwordFish_35
+  - first:
+      213: 339330837591772539
+    second: BehindTheSwordFish_36
+  - first:
+      213: -5960760210598488726
+    second: BehindTheSwordFish_37
+  - first:
+      213: 2018420275741954296
+    second: BehindTheSwordFish_38
+  - first:
+      213: -7634438960429442479
+    second: BehindTheSwordFish_39
+  - first:
+      213: -8508138608155500236
+    second: BehindTheSwordFish_40
+  - first:
+      213: 8635344099260542844
+    second: BehindTheSwordFish_41
+  - first:
+      213: -1151638487568811378
+    second: BehindTheSwordFish_42
+  - first:
+      213: 4061962711305963079
+    second: BehindTheSwordFish_43
+  - first:
+      213: 4564284499041198487
+    second: BehindTheSwordFish_44
+  - first:
+      213: 2347298606454587013
+    second: BehindTheSwordFish_45
+  - first:
+      213: -2010917913393216197
+    second: BehindTheSwordFish_46
+  - first:
+      213: 8461405444621539757
+    second: BehindTheSwordFish_47
+  - first:
+      213: 4205946091839690863
+    second: BehindTheSwordFish_48
+  - first:
+      213: -4223433742442069399
+    second: BehindTheSwordFish_49
+  - first:
+      213: -642548251891437738
+    second: BehindTheSwordFish_50
+  - first:
+      213: 3254951192703745055
+    second: BehindTheSwordFish_51
+  - first:
+      213: 6316701832765785797
+    second: BehindTheSwordFish_52
+  - first:
+      213: -7980877062348834430
+    second: BehindTheSwordFish_53
+  - first:
+      213: -3717218431526407839
+    second: BehindTheSwordFish_54
+  - first:
+      213: -4004790684214337859
+    second: BehindTheSwordFish_55
+  - first:
+      213: -3988236858592279331
+    second: BehindTheSwordFish_56
+  - first:
+      213: 3349400394886883277
+    second: BehindTheSwordFish_57
+  - first:
+      213: -7846599009636330470
+    second: BehindTheSwordFish_58
+  - first:
+      213: 3730201535829897475
+    second: BehindTheSwordFish_59
+  - first:
+      213: -2153816755336775249
+    second: BehindTheSwordFish_60
+  - first:
+      213: -3353195720383188372
+    second: BehindTheSwordFish_61
+  - first:
+      213: 6481301814041105809
+    second: BehindTheSwordFish_62
+  - first:
+      213: -3835787746560221513
+    second: BehindTheSwordFish_63
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: BehindTheSwordFish_0
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 210
+        width: 328
+        height: 283
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2a0edbfea50e285c0800000000000000
+      internalID: -4214559620091486046
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BehindTheSwordFish_1
+      rect:
+        serializedVersion: 2
+        x: 358
+        y: 212
+        width: 328
+        height: 283
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fceac66ae4ed8c660800000000000000
+      internalID: 7406414016591736527
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BehindTheSwordFish_2
+      rect:
+        serializedVersion: 2
+        x: 712
+        y: 208
+        width: 328
+        height: 283
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a4677f4bc70898090800000000000000
+      internalID: -8031747187338152374
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BehindTheSwordFish_3
+      rect:
+        serializedVersion: 2
+        x: 1055
+        y: 183
+        width: 355
+        height: 344
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 09fdb5731f3e6e8e0800000000000000
+      internalID: -1664392387111428208
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BehindTheSwordFish_4
+      rect:
+        serializedVersion: 2
+        x: 1417
+        y: 166
+        width: 361
+        height: 367
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7077f30fefd701c90800000000000000
+      internalID: -7201117270259566841
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BehindTheSwordFish_5
+      rect:
+        serializedVersion: 2
+        x: 1785
+        y: 168
+        width: 377
+        height: 397
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1cef5143c7c4d46d0800000000000000
+      internalID: -3004661280052740415
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5bf832a535d0f3b4785d5a323780724e
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":6.0,"y":1.0},"gridSpriteSize":{"x":362.0,"y":724.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      BehindTheSwordFish_0: -4214559620091486046
+      BehindTheSwordFish_1: 7406414016591736527
+      BehindTheSwordFish_2: -8031747187338152374
+      BehindTheSwordFish_3: -1664392387111428208
+      BehindTheSwordFish_4: -7201117270259566841
+      BehindTheSwordFish_5: -3004661280052740415
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

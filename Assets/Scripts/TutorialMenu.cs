@@ -7,6 +7,9 @@ public class TutorialMenu : MonoBehaviour
     private static readonly Color TutorialPanelBlue = new Color(0.02f, 0.34f, 0.55f, 0.92f);
     private static readonly Color ButtonHoverBlue = new Color(0.18039216f, 0.47843137f, 0.70980394f, 1f);
     private static readonly Color ButtonPressedBlue = new Color(0.050980393f, 0.18039216f, 0.27058825f, 1f);
+    private const float ThumbnailSize = 240f;
+    private const string GridInstructionText = "Click a tutorial to zoom in";
+    private const string FullscreenInstructionText = "Any button or click takes you back";
 
     private enum TutorialState
     {
@@ -24,6 +27,7 @@ public class TutorialMenu : MonoBehaviour
     [SerializeField] private Button backButton;
     [SerializeField] private Transform thumbnailContent;
     [SerializeField] private Button thumbnailButtonPrefab;
+    [SerializeField] private TextMeshProUGUI gridInstructionText;
 
     [Header("Fullscreen View")]
     [SerializeField] private GameObject fullscreenPanel;
@@ -83,8 +87,8 @@ public class TutorialMenu : MonoBehaviour
         if (layoutElement == null)
             layoutElement = thumbnailButton.gameObject.AddComponent<LayoutElement>();
 
-        layoutElement.preferredWidth = 200f;
-        layoutElement.preferredHeight = 200f;
+        layoutElement.preferredWidth = ThumbnailSize;
+        layoutElement.preferredHeight = ThumbnailSize;
         layoutElement.flexibleWidth = 0f;
         layoutElement.flexibleHeight = 0f;
 
@@ -110,6 +114,9 @@ public class TutorialMenu : MonoBehaviour
 
         if (fullscreenPanel != null)
             fullscreenPanel.SetActive(false);
+
+        if (gridInstructionText != null)
+            gridInstructionText.text = GridInstructionText;
     }
 
     private void ShowGrid()
@@ -141,7 +148,7 @@ public class TutorialMenu : MonoBehaviour
         }
 
         if (fullscreenInstructionText != null)
-            fullscreenInstructionText.text = "Any button or click takes you back";
+            fullscreenInstructionText.text = FullscreenInstructionText;
     }
 
     private bool AnyButtonOrClickDown()
@@ -181,7 +188,7 @@ public class TutorialMenu : MonoBehaviour
         if (scrollRect != null)
         {
             RectTransform scrollTransform = scrollRect.GetComponent<RectTransform>();
-            SetAnchoredRect(scrollTransform, new Vector2(0.04f, 0.1f), new Vector2(0.96f, 0.88f), Vector2.zero, Vector2.zero);
+            SetAnchoredRect(scrollTransform, new Vector2(0.04f, 0.1f), new Vector2(0.96f, 0.82f), Vector2.zero, Vector2.zero);
             scrollRect.horizontal = false;
             scrollRect.vertical = true;
 
@@ -190,14 +197,16 @@ public class TutorialMenu : MonoBehaviour
                 scrollBackground.color = TutorialPanelBlue;
         }
 
+        ConfigureGridInstructionText();
+
         if (thumbnailContent != null)
         {
             GridLayoutGroup gridLayout = thumbnailContent.GetComponent<GridLayoutGroup>();
             if (gridLayout == null)
                 gridLayout = thumbnailContent.gameObject.AddComponent<GridLayoutGroup>();
 
-            gridLayout.cellSize = new Vector2(200f, 200f);
-            gridLayout.spacing = new Vector2(24f, 24f);
+            gridLayout.cellSize = new Vector2(ThumbnailSize, ThumbnailSize);
+            gridLayout.spacing = new Vector2(28f, 28f);
             gridLayout.padding = new RectOffset(24, 24, 24, 24);
             gridLayout.childAlignment = TextAnchor.UpperCenter;
             gridLayout.constraint = GridLayoutGroup.Constraint.FixedColumnCount;
@@ -214,7 +223,7 @@ public class TutorialMenu : MonoBehaviour
         if (backButton != null)
         {
             RectTransform backTransform = backButton.GetComponent<RectTransform>();
-            SetAnchoredRect(backTransform, new Vector2(0.5f, 0.06f), new Vector2(0.5f, 0.06f), new Vector2(0f, 275f), new Vector2(320f, 88f));
+            SetAnchoredRect(backTransform, new Vector2(0.5f, 0f), new Vector2(0.5f, 0f), new Vector2(0f, 52.5f), new Vector2(320f, 88f));
             ApplyMenuButtonHoverColors(backButton);
         }
     }
@@ -255,8 +264,31 @@ public class TutorialMenu : MonoBehaviour
         {
             SetAnchoredRect(fullscreenInstructionText.GetComponent<RectTransform>(), new Vector2(0f, 1f), new Vector2(1f, 1f), new Vector2(0f, -40f), new Vector2(-80f, 60f));
             fullscreenInstructionText.alignment = TextAlignmentOptions.Center;
-            fullscreenInstructionText.text = "Any button or click takes you back";
+            fullscreenInstructionText.text = FullscreenInstructionText;
         }
+    }
+
+    private void ConfigureGridInstructionText()
+    {
+        if (gridPanel == null)
+            return;
+
+        if (gridInstructionText == null)
+        {
+            GameObject textObject = new GameObject("GridInstructionText", typeof(RectTransform), typeof(CanvasRenderer), typeof(TextMeshProUGUI));
+            textObject.transform.SetParent(gridPanel.transform, false);
+            gridInstructionText = textObject.GetComponent<TextMeshProUGUI>();
+        }
+
+        SetAnchoredRect(gridInstructionText.GetComponent<RectTransform>(), new Vector2(0f, 1f), new Vector2(1f, 1f), new Vector2(0f, -54f), new Vector2(-80f, 72f));
+        gridInstructionText.alignment = TextAlignmentOptions.Center;
+        gridInstructionText.fontSize = 36f;
+        gridInstructionText.color = Color.white;
+        gridInstructionText.raycastTarget = false;
+        if (fullscreenInstructionText != null && fullscreenInstructionText.font != null)
+            gridInstructionText.font = fullscreenInstructionText.font;
+
+        gridInstructionText.text = GridInstructionText;
     }
 
     private void StretchToParent(RectTransform rectTransform)

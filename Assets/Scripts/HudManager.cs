@@ -15,6 +15,14 @@ public class HudManager : MonoBehaviour
     public Color airLowColor = new Color(1f, 0f, 0f, 1f); // Red color for low air
     public float lowAirThreshold = 0.33f; // The percentage of air at which the color changes to red, .33 cause scoba diver rule
 
+    [Header("Low Air Warning")]
+    public float lowAirWarningThreshold = 0.3f;
+    public float lowAirWarningPulseSpeed = 4f;
+    public float lowAirWarningMaxAlpha = 0.45f;
+    public float lowAirWarningEdgeThickness = 48f;
+    private Image[] lowAirWarningEdges;
+    private float currentAirPercent = 1f;
+
     [Header("Health")]
     public TextMeshProUGUI healthText;
     public Image[] hearticons; // Image elements for the health hearts
@@ -41,18 +49,25 @@ public class HudManager : MonoBehaviour
 
     }
 
+    private void Update()
+    {
+        UpdateLowAirWarning();
+    }
+
     // Air
 
     public void UpdateAir(float normalizedValue)
     {
+        currentAirPercent = Mathf.Clamp01(normalizedValue);
+
         if (airSlider != null)
         {
-            airSlider.value = normalizedValue;
+            airSlider.value = currentAirPercent;
         }
 
         if (airFill != null)
         {
-            airFill.color = Color.Lerp(airLowColor, airFullColor, normalizedValue);
+            airFill.color = Color.Lerp(airLowColor, airFullColor, currentAirPercent);
         }
     }
 
@@ -80,6 +95,8 @@ public class HudManager : MonoBehaviour
 
     private void Start()
     {
+        EnsureLowAirWarningExists();
+
         if (createMissingObjectiveHud)
             EnsureObjectiveHudExists();
 
@@ -114,6 +131,90 @@ public class HudManager : MonoBehaviour
 
         if (enemyStatsText != null)
             enemyStatsText.text = "";
+    }
+
+    private void EnsureLowAirWarningExists()
+    {
+        if (lowAirWarningEdges != null && lowAirWarningEdges.Length > 0)
+            return;
+
+        Canvas canvas = GetComponentInParent<Canvas>();
+        if (canvas == null)
+            canvas = FindFirstObjectByType<Canvas>();
+
+        if (canvas == null)
+            return;
+
+        GameObject warningRoot = new GameObject("Low Air Warning", typeof(RectTransform));
+        warningRoot.layer = canvas.gameObject.layer;
+        warningRoot.transform.SetParent(canvas.transform, false);
+        warningRoot.transform.SetAsLastSibling();
+
+        RectTransform rootTransform = warningRoot.GetComponent<RectTransform>();
+        rootTransform.anchorMin = Vector2.zero;
+        rootTransform.anchorMax = Vector2.one;
+        rootTransform.offsetMin = Vector2.zero;
+        rootTransform.offsetMax = Vector2.zero;
+
+        lowAirWarningEdges = new Image[4];
+        lowAirWarningEdges[0] = CreateLowAirWarningEdge(warningRoot.transform, "Top", new Vector2(0f, 1f), new Vector2(1f, 1f), new Vector2(0.5f, 1f), new Vector2(0f, lowAirWarningEdgeThickness));
+        lowAirWarningEdges[1] = CreateLowAirWarningEdge(warningRoot.transform, "Bottom", Vector2.zero, new Vector2(1f, 0f), new Vector2(0.5f, 0f), new Vector2(0f, lowAirWarningEdgeThickness));
+        lowAirWarningEdges[2] = CreateLowAirWarningEdge(warningRoot.transform, "Left", Vector2.zero, new Vector2(0f, 1f), new Vector2(0f, 0.5f), new Vector2(lowAirWarningEdgeThickness, 0f));
+        lowAirWarningEdges[3] = CreateLowAirWarningEdge(warningRoot.transform, "Right", new Vector2(1f, 0f), Vector2.one, new Vector2(1f, 0.5f), new Vector2(lowAirWarningEdgeThickness, 0f));
+
+        SetLowAirWarningAlpha(0f);
+    }
+
+    private Image CreateLowAirWarningEdge(Transform parent, string edgeName, Vector2 anchorMin, Vector2 anchorMax, Vector2 pivot, Vector2 sizeDelta)
+    {
+        GameObject edgeObject = new GameObject(edgeName + " Edge", typeof(RectTransform), typeof(CanvasRenderer), typeof(Image));
+        edgeObject.layer = parent.gameObject.layer;
+        edgeObject.transform.SetParent(parent, false);
+
+        RectTransform rectTransform = edgeObject.GetComponent<RectTransform>();
+        rectTransform.anchorMin = anchorMin;
+        rectTransform.anchorMax = anchorMax;
+        rectTransform.pivot = pivot;
+        rectTransform.anchoredPosition = Vector2.zero;
+        rectTransform.sizeDelta = sizeDelta;
+
+        Image image = edgeObject.GetComponent<Image>();
+        image.color = new Color(1f, 0f, 0f, 0f);
+        image.raycastTarget = false;
+
+        return image;
+    }
+
+    private void UpdateLowAirWarning()
+    {
+        if (lowAirWarningEdges == null || lowAirWarningEdges.Length == 0)
+            return;
+
+        if (currentAirPercent > lowAirWarningThreshold)
+        {
+            SetLowAirWarningAlpha(0f);
+            return;
+        }
+
+        float threshold = Mathf.Max(0.001f, lowAirWarningThreshold);
+        float warningStrength = Mathf.InverseLerp(threshold, 0f, currentAirPercent);
+        float pulse = (Mathf.Sin(Time.time * lowAirWarningPulseSpeed) + 1f) * 0.5f;
+        float alpha = Mathf.Lerp(lowAirWarningMaxAlpha * 0.35f, lowAirWarningMaxAlpha, pulse) * warningStrength;
+
+        SetLowAirWarningAlpha(alpha);
+    }
+
+    private void SetLowAirWarningAlpha(float alpha)
+    {
+        for (int i = 0; i < lowAirWarningEdges.Length; i++)
+        {
+            if (lowAirWarningEdges[i] == null)
+                continue;
+
+            Color color = lowAirWarningEdges[i].color;
+            color.a = alpha;
+            lowAirWarningEdges[i].color = color;
+        }
     }
 
     private void UpdateKilledCountText(EnemyType enemyType, int[] killedCounts)

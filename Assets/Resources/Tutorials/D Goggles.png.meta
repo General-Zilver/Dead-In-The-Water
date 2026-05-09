@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 7bd90caf06652cc4686248e8261f1972
+guid: e141fc20bef190f4dbf7b677f09bc60d
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 699742988220537437
-    second: Icon14_0
+      213: -6485910900883015270
+    second: D Goggles_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Icon14_0
+      name: D Goggles_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 1
-        width: 32
-        height: 30
+        y: 0
+        width: 1448
+        height: 1086
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d5a94f65a8cf5b900800000000000000
-      internalID: 699742988220537437
+      spriteID: a99b804466a6df5a0800000000000000
+      internalID: -6485910900883015270
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Icon14_0: 699742988220537437
+      D Goggles_0: -6485910900883015270
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

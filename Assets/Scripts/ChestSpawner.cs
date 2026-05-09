@@ -4,14 +4,15 @@ using System.Collections.Generic;
 public class ChestSpawner : MonoBehaviour
 {
     [SerializeField] private TreasureChest chestPrefab;
+    [SerializeField] private TreasureChest[] chestPrefabs;
     [SerializeField] private Transform[] chestSpawnPoints;
 
     // Spawn the correct number of chests based on difficulty, each at a unique spawn point
     private void Start()
     {
-        if (chestPrefab == null)
+        if (chestPrefab == null && (chestPrefabs == null || chestPrefabs.Length == 0))
         {
-            Debug.LogWarning("ChestSpawner: chestPrefab is not assigned.");
+            Debug.LogWarning("ChestSpawner: no chest prefabs are assigned.");
             return;
         }
 
@@ -35,10 +36,25 @@ public class ChestSpawner : MonoBehaviour
             available.RemoveAt(pick);
 
             Transform spawnPoint = chestSpawnPoints[spawnPointIdx];
-            TreasureChest chest = Instantiate(chestPrefab, spawnPoint.position, Quaternion.identity);
+            TreasureChest prefab = GetChestPrefab(chestIdx);
+            if (prefab == null)
+            {
+                Debug.LogWarning("ChestSpawner: no chest prefab assigned for index " + chestIdx + ".");
+                continue;
+            }
+
+            TreasureChest chest = Instantiate(prefab, spawnPoint.position, Quaternion.identity);
             chest.Initialize(chestIdx);
         }
 
         Debug.Log("ChestSpawner: spawned " + count + " chests.");
+    }
+
+    private TreasureChest GetChestPrefab(int index)
+    {
+        if (chestPrefabs != null && index >= 0 && index < chestPrefabs.Length && chestPrefabs[index] != null)
+            return chestPrefabs[index];
+
+        return chestPrefab;
     }
 }

@@ -162,6 +162,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   player: {fileID: 0}
   moveSpeed: 5
+  attackRange: 15
+  swimStateName: Shark_Swim
+  attackStateName: Shark_Attack
 --- !u!60 &3687771137475327320
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -341,6 +344,8 @@ MonoBehaviour:
   sawSharkRidePrefab: {fileID: 0}
   scorePopupPrefab: {fileID: 7538022219821914435, guid: 6aef13bf51d34014ea467a22fff22ec2, type: 3}
   scorePopupOffset: {x: 0, y: 0, z: 0}
+  gogglesDropPrefab: {fileID: 7758773904047163175, guid: c62d332ea35aab1458bc14ad9894e0be, type: 3}
+  gogglesDropChance: 0.05
   deathAnimationController: {fileID: 9100000, guid: 5ec66c9d84d764742ac85c56f4edb1cb, type: 2}
   deathAnimationDuration: 2
   spawner: {fileID: 0}

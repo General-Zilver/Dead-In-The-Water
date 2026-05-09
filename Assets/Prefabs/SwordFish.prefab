@@ -327,6 +327,8 @@ MonoBehaviour:
   sawSharkRidePrefab: {fileID: 0}
   scorePopupPrefab: {fileID: 7538022219821914435, guid: 6aef13bf51d34014ea467a22fff22ec2, type: 3}
   scorePopupOffset: {x: 0, y: 0, z: 0}
+  gogglesDropPrefab: {fileID: 7758773904047163175, guid: c62d332ea35aab1458bc14ad9894e0be, type: 3}
+  gogglesDropChance: 0.05
   deathAnimationController: {fileID: 9100000, guid: c2adc9233780fdb4c8f22859b98390e3, type: 2}
   deathAnimationDuration: 2
   spawner: {fileID: 0}
@@ -363,6 +365,11 @@ MonoBehaviour:
   dashSpeed: 25
   dashDuration: 3
   recoveryDuration: 3
+  visualScale: 1.25
+  chargingBackgroundController: {fileID: 9100000, guid: b22631785724b1c46be7c22b43b34208, type: 2}
+  dashingAnimationController: {fileID: 9100000, guid: 49392f74d32f8b548bcde488217dbc2a, type: 2}
+  chargingBackgroundScaleMultiplier: 2
+  dashingScaleMultiplier: 1
 --- !u!114 &-5588289043735011337
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -327,6 +327,8 @@ MonoBehaviour:
   sawSharkRidePrefab: {fileID: 6200471973423370001, guid: 6bcdaea4f60b4bc197964be0c87b3e13, type: 3}
   scorePopupPrefab: {fileID: 7538022219821914435, guid: 6aef13bf51d34014ea467a22fff22ec2, type: 3}
   scorePopupOffset: {x: 0, y: 0, z: 0}
+  gogglesDropPrefab: {fileID: 7758773904047163175, guid: c62d332ea35aab1458bc14ad9894e0be, type: 3}
+  gogglesDropChance: 0.05
   spawner: {fileID: 0}
 --- !u!114 &7426502868465963085
 MonoBehaviour:
@@ -355,6 +357,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SawSharkMovement
   player: {fileID: 0}
   moveSpeed: 5
+  attackRange: 15
+  attackAnimationController: {fileID: 9100000, guid: 849637f2002090e4abd2e4c912c5fcec, type: 2}
 --- !u!114 &-5588289043735011337
 MonoBehaviour:
   m_ObjectHideFlags: 0
