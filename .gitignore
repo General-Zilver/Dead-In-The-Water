@@ -5,9 +5,11 @@
 .utmp/
 /[Ll]ibrary/
 /[Tt]emp/
+/[Tt]emplate[Dd]ata/
 /[Oo]bj/
 /[Bb]uild/
 /[Bb]uilds/
+/DeadInTheWaterWebBuild/
 /[Ll]ogs/
 /[Uu]ser[Ss]ettings/
 *.log
